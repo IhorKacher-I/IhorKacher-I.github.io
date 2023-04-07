@@ -37,6 +37,62 @@
         </div>
     </main>
 
+
+
+    <div class="form__create-visit">
+
+        <div class="create-visit__header">
+            <h2 class="header__title">Create Visit</h2>
+            <span class="header__close-button">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.7279 1.41421L11.3137 0L6.36396 4.94975L1.41421 0L0 1.41421L4.94975 6.36396L0 11.3137L1.41421 12.7279L6.36396 7.77817L11.3137 12.7279L12.7279 11.3137L7.77817 6.36396L12.7279 1.41421Z" fill="#541A81"/>
+                </svg>
+            </span>
+        </div>
+
+
+
+        <div class="create-visit__selects">
+            <div class="selects__doctor">
+                <select id="doctor-select" class="doctor__select">
+                    <option value="">Choose a doctor</option>
+                    <option value="1">Dr. John Smith</option>
+                    <option value="2">Dr. Jane Doe</option>
+                </select>
+            </div>
+            <div class="selects__priority">
+                <select id="priority-select" class="priority__select">
+                    <option value="">Choose a priority</option>
+                    <option value="1">High</option>
+                    <option value="2">Medium</option>
+                    <option value="3">Low</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="create-visit__purpose">
+            <label class="purpose__label" for="purpose-textarea"></label>
+            <input id="purpose-textarea" class="purpose__input" placeholder="The purpose of the visit?">
+        </div>
+
+        <div class="create-visit__description">
+            <label class="description__label" for="description-textarea"></label>
+            <textarea id="description-textarea" class="description__textarea" placeholder="Description:"></textarea>
+        </div>
+
+        <div class="create-visit__name">
+            <label class="name__label" for="name-textarea"></label>
+            <input id="name-textarea" class="name__input" placeholder="Enter full name:">
+        </div>
+
+        <div class="create-visit__submit">
+            <button class="submit__button">+</button>
+        </div>
+
+    </div>
+
+
+
     <script src="./javaScript/main.js"></script>
 </div>
 </body>

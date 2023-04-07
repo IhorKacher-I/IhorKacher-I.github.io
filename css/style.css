@@ -63,3 +63,138 @@
     background: linear-gradient(90deg, #9229C1 0%, #541A81 100%);
 }
 
+
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+
+
+.form__create-visit {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 35%);
+    height: 464px;
+    width: 900px;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 20px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    padding: 35px;
+}
+
+.create-visit__header {
+    border-bottom: 1px solid #e6e6e6;
+}
+.header__title {
+    margin: 0 auto 30px auto;
+    width: max-content;
+    color: #3B3F61;
+    font-size: 36px;
+    line-height: 20px;
+    font-weight: 500;
+}
+
+.create-visit__selects {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+    padding: 10px;
+}
+
+.create-visit__purpose {
+    padding: 10px;
+}
+
+.create-visit__description {
+    padding: 10px;
+}
+
+.create-visit__name {
+    padding: 10px;
+}
+
+.create-visit__submit {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 10px;
+}
+
+/* Selects */
+.create-visit__selects {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+}
+.doctor__select,
+.priority__select {
+    color: #686B84;
+    height: 40px;
+    border-radius: 8px;
+    background: #EEEFF5;
+    border: 0;
+    width: 100%;
+    padding: 10px;
+
+}
+.doctor__select option,
+.priority__select option {
+    height: 40px;
+    background: #EEEFF5;
+    border: 0;
+    font-size: 16px;
+    line-height: 20px;
+}
+/* Textareas */
+.purpose__input,
+.description__textarea,
+.name__input {
+    border: 0;
+    background: #EEEFF5;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 10px;
+    resize: none;
+    width: 100%;
+    height: 40px;
+}
+.description__textarea {
+    height: 80px;
+}
+
+/* Button */
+.submit__button {
+    background: linear-gradient(90deg, #F58512 0%, #EE3120 100%);
+    border-radius: 13px;
+    border: 0;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 300;
+    cursor: pointer;
+    padding: 0;
+    height: 35px;
+    width: 35px;
+
+}
+
+.submit__button:hover {
+    background: #3D0F66;
+}
+
+/* Close button */
+.header__close-button {
+    cursor: pointer;
+    position: absolute;
+    top: 35px;
+    right: 35px;
+    height: 13px;
+    width: 13px;
+}
+.header__close-button:hover svg path {
+    fill: #EE3120;
+}
+
+
+
