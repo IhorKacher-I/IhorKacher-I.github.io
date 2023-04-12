@@ -215,6 +215,10 @@ ul {
   color: #686b84;
   cursor: pointer;
 }
+.card__more:hover {
+  color: #541a81;
+}
+
 .card__navigation {
   display: flex;
   flex-direction: column;
