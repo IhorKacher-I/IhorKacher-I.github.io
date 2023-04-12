@@ -224,4 +224,110 @@ ul {
 }
 .button__edit {
 }
-/*  */
+/* full-visit-information */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.cards__full-visit-information {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 35%);
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 20px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+  padding: 35px;
+  height: 400px;
+  width: 900px;
+
+  position: absolute;
+  top: 0;
+}
+
+.full-visit-information__header {
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.full-visit-information__title {
+  margin: 0 auto 30px auto;
+  width: max-content;
+  color: #3b3f61;
+  font-size: 36px;
+  line-height: 20px;
+  font-weight: 500;
+}
+.header__close-button {
+  cursor: pointer;
+  position: absolute;
+  top: 35px;
+  right: 35px;
+  height: 13px;
+  width: 13px;
+}
+.header__close-button:hover svg path {
+  fill: #ee3120;
+}
+
+.full-visit-information__body {
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.doctor__label,
+.priority__label,
+.patient-name__label,
+.visit-purpose__label,
+.visit-description__label {
+  color: #3b3f61;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.doctor__name,
+.priority__name,
+.patient-name__value,
+.visit-purpose__value,
+.visit-description__value {
+  position: absolute;
+  left: 20%;
+
+  color: #3b3f61;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.full-visit-information__buttons {
+  margin-left: auto;
+}
+.buttons__edit-button {
+  cursor: pointer;
+
+  height: 21px;
+  width: 15px;
+}
+.buttons__delete-button {
+  cursor: pointer;
+  padding-left: 17px;
+  height: 20px;
+  width: 20px;
+}
+
+.buttons__edit-button:hover svg path {
+  stroke: #2ba60b;
+}
+.buttons__delete-button:hover svg path {
+  fill: #ee3120;
+}
