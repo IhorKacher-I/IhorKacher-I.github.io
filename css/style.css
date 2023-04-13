@@ -143,3 +143,164 @@
 /*    line-height: 18px;*/
 /*    color: #FFFFFF;*/
 /*}*/
+
+
+/**       CREATE VISIT STYLES         **/
+.modal-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: max-content;
+    width: 900px;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 20px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    padding: 35px;
+}
+.modal-window__header {
+    margin: 0 auto 30px auto;
+    text-align: center;
+}
+/*.modal-window__header {*/
+.header__title {
+    margin: 0;
+    color: #3B3F61;
+    font-size: 36px;
+    line-height: 20px;
+    font-weight: 500;
+}
+/* Close button */
+.header__close-button {
+    cursor: pointer;
+    position: absolute;
+    top: 35px;
+    right: 35px;
+    height: 13px;
+    width: 13px;
+}
+.header__close-button:hover svg path {
+    fill: #EE3120;
+}
+/*********Close button end*************/
+
+
+.create-visit__form {
+    display: grid;
+    /*grid-template-columns: repeat(3, 1fr);*/
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+    /*grid-template-rows: auto;*/
+    gap: 25px;
+}
+.doctor__select {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+.priority__select {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+}
+.purpose__input {
+    grid-column: 1 / 4;
+    grid-row: 2 / 3;
+}
+.description__textarea {
+    grid-column: 1 / 4;
+    grid-row: 3 / 4;
+}
+.name__input {
+    grid-column: 1 / 4;
+    grid-row: 4 / 5;
+}
+.create-visit-form__submit {
+    grid-column: 1 / 4;
+
+    /*grid-column: 3 / 4;*/
+    /*grid-row: 5 / -1;*/
+    margin-left: auto;
+}
+/*cardiologist fields*/
+.pressure__input,
+.last-visit__input,
+.therapist-age-field__input {
+    grid-column: 1 / 2;
+    grid-row: 5 / 6;
+}
+.bmi__input {
+    grid-column: 2 / 3;
+    grid-row: 5 / 6;
+}
+.age__input {
+    grid-column: 3 / 4;
+    grid-row: 5 / 6;
+}
+.diseases__input {
+    grid-column: 1 / 4;
+    grid-row: 6 / 7;
+}
+/* Selects */
+
+.doctor__select,
+.priority__select {
+    color: #686B84;
+    height: 40px;
+    border-radius: 8px;
+    background: #EEEFF5;
+    border: 0;
+    width: 100%;
+    padding: 10px;
+
+}
+.doctor__select option,
+.priority__select option {
+    font-size: 16px;
+    line-height: 20px;
+}
+.purpose__input,
+.description__textarea,
+.name__input,
+.pressure__input,
+.bmi__input,
+.age__input,
+.diseases__input,
+.last-visit__input,
+.therapist-age-field__input {
+    border: 0;
+    background: #EEEFF5;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 10px;
+    resize: none;
+    width: 100%;
+    height: 40px;
+}
+.description__textarea,
+.diseases__input {
+    height: 80px;
+}
+
+/* Button */
+.create-visit-form__submit {
+    background: linear-gradient(90deg, #F58512 0%, #EE3120 100%);
+    border-radius: 13px;
+    border: 0;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 300;
+    cursor: pointer;
+    padding: 0;
+    height: 35px;
+    width: 35px;
+
+}
+
+.create-visit-form__submit:hover {
+    background: #3D0F66;
+}
+
+
+
+
+/**       CREATE VISIT STYLES END        **/

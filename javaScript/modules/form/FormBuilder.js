@@ -32,13 +32,29 @@ export default class FormBuilder {
         this.#form.append(label);
     }
 
-    addInput(classList = [], id = "", type = "", name = "", required = false ) {
-        const input = createHTMLElement("input", classList, {id, type, name, required});
+    addInput(classList = [], id = "", type = "", name = "", required = false, placeholder = '' ) {
+        const input = createHTMLElement("input", classList, {id, type, name, required, placeholder});
         this.#form.append(input);
     }
     addButton(classList = [], id = "", type = "", textContent = "") {
         const button = createHTMLElement("button", classList, {id, type, textContent});
         this.#form.append(button);
+    }
+    addSelect(classList = [], required = false, options = [],) {
+        const select = createHTMLElement("select", classList, { name, required});
+        for (const option of options) {
+            const { value, textContent } = option;
+            const optionElement = createHTMLElement("option", [], { value, textContent });
+            select.append(optionElement);
+        }
+        // if (selectHandler !== null) {
+        //     select.addEventListener('change', selectHandler);
+        // }
+        this.#form.append(select);
+    }
+    addTextarea(classList = [], required = false, placeholder = "") {
+        const textarea = createHTMLElement("textarea", classList, {name, required, placeholder});
+        this.#form.append(textarea);
     }
 
     get form() {
