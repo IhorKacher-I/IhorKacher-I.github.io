@@ -1,3 +1,5 @@
+import Request from "./Request.js";
+
 export class Visit {
     constructor({
                     doctorName,
