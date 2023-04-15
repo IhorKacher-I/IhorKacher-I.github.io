@@ -71,6 +71,7 @@
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #fff;
+  min-height: 300px;
 }
 .filter__header {
   display: flex;
@@ -133,10 +134,12 @@ ul {
 .select__list {
   background: #eeeff5;
   border-radius: 0px 0px 8px 8px;
-  opacity: 0;
+  /* opacity: 0; */
+  display: none;
 }
 .select__list.active {
-  opacity: 1;
+  /* opacity: 1; */
+  display: block;
 }
 /* .filter__select--urgency.active {
   opacity: 1;
@@ -172,7 +175,7 @@ ul {
   padding-bottom: 40px;
   background-color: #fff;
 }
-.cards__container {
+.cards-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -227,6 +230,9 @@ ul {
 .button__trash {
 }
 .button__edit {
+}
+.hide {
+  display: none;
 }
 /* full-visit-information */
 .modal {
