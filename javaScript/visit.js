@@ -85,7 +85,7 @@ class Visit {
     description,
     patientName,
     id,
-  }) {
+  } = data) {
     this.doctorName = doctorName;
     this.priority = priority;
     this.status = status;
@@ -151,7 +151,7 @@ class Visit {
 
     const btnMore = card.querySelector(".card__more");
     btnMore.addEventListener("click", () => {
-      // new Modal + method showFullInfo()
+      //створюю new Modal("Information about the visit", {} - object картки на яку натискаємо) + method showFullInfo()
     });
     //  console.log(this.renderFullInfo);
 
@@ -159,7 +159,7 @@ class Visit {
   }
 }
 data.forEach((d) => {
-  //   const { doctorName, priority, purposeVisit, description, patientName } = d;
+  const { doctorName, priority, purposeVisit, description, patientName } = d;
 
   const newCardList = new Visit(d);
 
