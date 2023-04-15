@@ -47,12 +47,9 @@ export default class FormBuilder {
             const optionElement = createHTMLElement("option", [], { value, textContent });
             select.append(optionElement);
         }
-        // if (selectHandler !== null) {
-        //     select.addEventListener('change', selectHandler);
-        // }
         this.#form.append(select);
     }
-    addTextarea(classList = [], required = false, placeholder = "") {
+    addTextarea(classList = [], type = "", required = false, placeholder = "") {
         const textarea = createHTMLElement("textarea", classList, {name, required, placeholder});
         this.#form.append(textarea);
     }

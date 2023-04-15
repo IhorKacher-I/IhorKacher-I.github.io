@@ -12,8 +12,6 @@ export class Modal {
         this.form = form;
     }
     render() {
-
-        // console.log(`${this.title} + ${this.form}`)
         const createModalWindow = createHTMLElement('div', ['modal-window'],);
         const windowHeader =  createHTMLElement('div', ['modal-window__header'],);
         const windowTitle = createHTMLElement('h2', ['header__title'],);
@@ -27,8 +25,9 @@ export class Modal {
         });
 
         //form має бути розміткою уже того типу який нам потрібен
-        // console.log(this.form)
-        windowHeader.after(this.form)
+        if (this.form instanceof HTMLFormElement) {
+            windowHeader.after(this.form)
+        } //todo тут напишу логіку для card full info в else для обробки об'єкту
         return createModalWindow;
     }
 

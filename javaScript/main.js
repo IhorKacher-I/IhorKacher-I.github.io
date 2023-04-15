@@ -3,10 +3,11 @@ import getTokenFromCookie from "./functions/getTokenFromCookie.js";
 import User from "./modules/User.js";
 import Request from "./modules/Request.js";
 import {Modal} from "./modules/Modal.js";
-import { root } from "./constants/const.js";
+import {BASE_URL, root} from "./constants/const.js";
 import FormBuilder from "./modules/form/FormBuilder.js";
 import FormDirector from "./modules/form/FormDirector.js";
-import {removeElementCollection} from "./functions/functions.js";
+import { changeDoctorFields, createVisitObj } from "./functions/functions.js";
+import { Visit } from "./modules/Visit.js";
 
 window.addEventListener("load", (e) => {
     const logInBtn = document.querySelector("#logout-btn");
@@ -20,65 +21,51 @@ window.addEventListener("load", (e) => {
     })
 
     const addVisitBtn = document.querySelector("#add-visit-header-btn");
-    addVisitBtn.addEventListener("click", (e) => {
-    //todo записати все що нижче у функцію і видаляти лісенер щоб не спрацьовував повторний клік
+    function addVisit(e) {
         //todo scrot, blur background та скрол поза вікном, закриття по кліку поза вікном
-        //todo записати все що нижче у функцію і видаляти лісенер щоб не спрацьовував повторний клік
-
-        const createVisitForm = new FormBuilder(["create-visit__form"]);
+        const createVisitForm = new FormBuilder(["create-visit__form"], "create-visit__form");
         const formDirector = new FormDirector();
         formDirector.setBuilder(createVisitForm);
         formDirector.buildCreateVisitForm();
         const createVisit = new Modal('Create visit', createVisitForm.form).render();
         root.append(createVisit);
-        let doctor = document.querySelector('.doctor__select')
-        doctor.addEventListener('change', () => {
-            switch (event.target.value) {
-                case 'cardiologist': {
-                    removeElementCollection('.additional-fields');
-                    createVisit.lastChild.append(...formDirector.addCardiologistFields());
-                }
-                break;
-                case 'dentist': {
-                    removeElementCollection('.additional-fields');
-                    createVisit.lastChild.append(formDirector.addDentistFields());
-                }
-                    break;
-                case 'therapist': {
-                    removeElementCollection('.additional-fields');
-                    createVisit.lastChild.append(formDirector.addTherapistFields());
-                }
-                    break;
-                default:
-                    removeElementCollection('.additional-fields');
-            }
+        let doctorSelect = document.querySelector('.create-visit__doctor')
+
+        changeDoctorFields(createVisit, formDirector, doctorSelect);
+
+        addVisitBtn.removeEventListener('click', addVisit);
+
+        createVisit.lastChild.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const promiseObj = new Request().post("", createVisitObj());
+            promiseObj.then(obj => {
+                new Visit(obj).renderShortCard();
+                document.querySelector('.modal-window').remove();
+                const sectionCards = document.querySelector(".cards-list");
+                sectionCards.prepend(new Visit(obj).renderShortCard());
+                addVisitBtn.addEventListener("click", addVisit);
+            })
+
+
+
         })
-    })
+    }
+    addVisitBtn.addEventListener("click", addVisit);
+
 
 
     if (isLogin()) {
         getTokenFromCookie();
         root.insertAdjacentHTML("afterbegin", `<div class="container"><h3>No items</h3></div>`);
         // ПИСАТИ ВСЕ ТУТ НИЖЧЕ!!!!!!!
-        const request = new Request();
-        // request.post("", {
-        //     title: 'Визит к кардиологу',
-        //     description: 'Плановый визит',
-        //     doctor: 'Cardiologist',
-        //     bp: '24',
-        //     age: 23,
-        //     weight: 70
-        // }).then(data => console.log(data));
-        // request.get("").then(data => console.log(data));
-        // request.delete("161581").then(data => console.log(data));
-        // request.put("161580", {id: 161580,
-        //     title: 'Визит к кардиологу',
-        //     description: 'Новое описание визита',
-        //     doctor: 'Cardiologist',
-        //     bp: '24',
-        //     age: 23,
-        //     weight: 70}).then(data => console.log(data));
-        // request.get("").then(data => console.log(data));
+
+        const request = new Request().get('');
+        request.then(data => {
+            const liArray = data.map(obj => {
+                return new Visit(obj).renderShortCard();
+            });
+            document.querySelector(".cards-list").append(...liArray);
+        })
     } else {
         window.location.href = "login.html";
     }

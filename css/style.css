@@ -188,62 +188,60 @@
 
 .create-visit__form {
     display: grid;
-    /*grid-template-columns: repeat(3, 1fr);*/
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-
-    /*grid-template-rows: auto;*/
     gap: 25px;
 }
-.doctor__select {
+.create-visit__doctor {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
 }
-.priority__select {
+.create-visit__priority {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
 }
-.purpose__input {
+.create-visit__status {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+}
+.create-visit__purpose {
     grid-column: 1 / 4;
     grid-row: 2 / 3;
 }
-.description__textarea {
+.create-visit__description {
     grid-column: 1 / 4;
     grid-row: 3 / 4;
 }
-.name__input {
+.create-visit__name {
     grid-column: 1 / 4;
     grid-row: 4 / 5;
 }
-.create-visit-form__submit {
+.create-visit__submit {
     grid-column: 1 / 4;
-
-    /*grid-column: 3 / 4;*/
-    /*grid-row: 5 / -1;*/
     margin-left: auto;
 }
 /*cardiologist fields*/
-.pressure__input,
-.last-visit__input,
-.therapist-age-field__input {
+.create-visit__pressure,
+.create-visit__last-visit,
+.create-visit__therapist-age-field {
     grid-column: 1 / 2;
     grid-row: 5 / 6;
 }
-.bmi__input {
+.create-visit__bmi {
     grid-column: 2 / 3;
     grid-row: 5 / 6;
 }
-.age__input {
+.create-visit__age {
     grid-column: 3 / 4;
     grid-row: 5 / 6;
 }
-.diseases__input {
+.create-visit__diseases {
     grid-column: 1 / 4;
     grid-row: 6 / 7;
 }
 /* Selects */
-
-.doctor__select,
-.priority__select {
+.create-visit__doctor,
+.create-visit__priority,
+.create-visit__status {
     color: #686B84;
     height: 40px;
     border-radius: 8px;
@@ -251,22 +249,21 @@
     border: 0;
     width: 100%;
     padding: 10px;
-
 }
-.doctor__select option,
-.priority__select option {
+.create-visit__doctor option,
+.create-visit__priority option {
     font-size: 16px;
     line-height: 20px;
 }
-.purpose__input,
-.description__textarea,
-.name__input,
-.pressure__input,
-.bmi__input,
-.age__input,
-.diseases__input,
-.last-visit__input,
-.therapist-age-field__input {
+.create-visit__purpose,
+.create-visit__description,
+.create-visit__name,
+.create-visit__pressure,
+.create-visit__bmi,
+.create-visit__age,
+.create-visit__diseases,
+.create-visit__last-visit,
+.create-visit__therapist-age-field {
     border: 0;
     background: #EEEFF5;
     border-radius: 8px;
@@ -276,13 +273,12 @@
     width: 100%;
     height: 40px;
 }
-.description__textarea,
-.diseases__input {
+.create-visit__description,
+.create-visit__diseases {
     height: 80px;
 }
-
 /* Button */
-.create-visit-form__submit {
+.create-visit__submit {
     background: linear-gradient(90deg, #F58512 0%, #EE3120 100%);
     border-radius: 13px;
     border: 0;
@@ -293,14 +289,93 @@
     padding: 0;
     height: 35px;
     width: 35px;
-
 }
-
-.create-visit-form__submit:hover {
+.create-visit__submit:hover {
     background: #3D0F66;
 }
-
-
-
-
 /**       CREATE VISIT STYLES END        **/
+
+
+/**       CARDS STYLES         **/
+.cards {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #fff;
+}
+.cards-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.card {
+    display: flex;
+    justify-content: space-between;
+    width: 568px;
+    height: 168px;
+    border: 1px solid #eeeff5;
+    border-radius: 32px;
+    padding: 30px;
+    margin-top: 30px;
+    background-color: #FFFFFF;
+}
+.card:hover {
+    border: 1px solid #f58512;
+}
+
+.card__info {
+}
+.card__name {
+    margin: 0;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    color: #3b3f61;
+}
+.card__doctor {
+    margin: 0;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #686b84;
+}
+.card__more {
+    padding-top: 2em;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #686b84;
+    cursor: pointer;
+}
+.card__more:hover {
+    color: #541a81;
+}
+
+.card__navigation {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.button__trash {
+}
+.button__edit {
+}
+.hide {
+    display: none;
+}
+
+
+
+.logout__button,
+.add-visit__button {
+    width: 36px;
+    height: 36px;
+    padding: 10px 8px;
+}
+
+.add-visit__button {
+    margin-left: auto;
+    margin-right: 20px;
+}
+/**       CARDS STYLES END        **/

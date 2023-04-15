@@ -33,40 +33,44 @@ export default class FormDirector {
     }
 
     buildCreateVisitForm() {
-
-
-        this.#builder.addSelect(['doctor__select'], true, [
+        this.#builder.addSelect(['create-visit__doctor'], true, [
             { value: "", textContent: "Choose a doctor" },
             { value: "cardiologist", textContent: "Cardiologist" },
             { value: "dentist", textContent: "Dentist" },
             { value: "therapist", textContent: "Therapist" },
         ]);
-        this.#builder.addSelect(['priority__select'], true, [
+        this.#builder.addSelect(['create-visit__priority'], true, [
             { value: "", textContent: "Choose a priority" },
-            { value: "1", textContent: "High" },
-            { value: "2", textContent: "Medium" },
-            { value: "3", textContent: "Low" },
+            { value: "high", textContent: "High" },
+            { value: "normal", textContent: "Normal" },
+            { value: "low", textContent: "Low" },
         ], );
-        this.#builder.addInput(["purpose__input"],"login", "", "", true, 'The purpose of the visit?');
-        this.#builder.addTextarea(["description__textarea"],true, "Description");
-        this.#builder.addInput(["name__input"],"login", "", "", true, 'Enter full name:');
-        this.#builder.addButton(["create-visit-form__submit"], "login-btn", "submit", "+");
+
+        this.#builder.addSelect(['create-visit__status'], true, [
+            { value: "open", textContent: "Open" },
+            { value: "done", textContent: "Done" },
+        ], );
+
+        this.#builder.addInput(["create-visit__purpose"],"", "text", "", true, 'The purpose of the visit?');
+        this.#builder.addTextarea(["create-visit__description"],"text",true, "Description");
+        this.#builder.addInput(["create-visit__name"],"", "text", "", true, 'Enter full name:');
+        this.#builder.addButton(["create-visit__submit"], "", "submit", "+");
 
     }
     addCardiologistFields() {
         return [
-            createHTMLElement("input", ["pressure__input", "additional-fields"], {placeholder:'Normal pressure:'}),
-            createHTMLElement("input", ["bmi__input", "additional-fields"], {placeholder:'Body mass index:'}),
-            createHTMLElement("input", ["age__input", "additional-fields"], {placeholder:'Age:'}),
-            createHTMLElement("textarea", ["diseases__input", "additional-fields"], {placeholder:'Diseases:'}),
+            createHTMLElement("input", ["create-visit__pressure", "additional-fields"], {type: 'text', placeholder:'Normal pressure:'}),
+            createHTMLElement("input", ["create-visit__bmi", "additional-fields"], {type: 'number', placeholder:'Body mass index:'}),
+            createHTMLElement("input", ["create-visit__age", "additional-fields"], {type: 'number', placeholder:'Age:'}),
+            createHTMLElement("textarea", ["create-visit__diseases", "additional-fields"], {placeholder:'Diseases:'}),
         ]
 
 
     }
     addDentistFields() {
-        return createHTMLElement("input", ["last-visit__input", "additional-fields"], {placeholder:'Date of last visit:'});
+        return createHTMLElement("input", ["create-visit__last-visit", "additional-fields"], {type: 'date', placeholder:'Date of last visit:'});
     }
     addTherapistFields() {
-        return createHTMLElement("input", ["therapist-age-field__input", "additional-fields"], {placeholder:'Age:'});
+        return createHTMLElement("input", ["create-visit__therapist-age-field", "additional-fields"], {type: 'number', placeholder:'Age:'});
     }
 }
