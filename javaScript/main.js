@@ -2,9 +2,9 @@ import {isLogin} from "./functions/isLogin.js";
 import getTokenFromCookie from "./functions/getTokenFromCookie.js";
 import User from "./modules/User.js";
 import Request from "./modules/Request.js";
-import { root } from "./constants/const.js";
-import { addVisit } from "./functions/functions.js";
-import { Visit } from "./modules/Visit.js";
+import {root} from "./constants/const.js";
+import {addVisit} from "./functions/functions.js";
+import {Visit} from "./modules/Visit.js";
 
 window.addEventListener("load", () => {
     const logInBtn = document.querySelector("#logout-btn");
@@ -21,14 +21,18 @@ window.addEventListener("load", () => {
     addVisitBtn.addEventListener("click", addVisit);
 
 
-
     if (isLogin()) {
         getTokenFromCookie();
-        root.insertAdjacentHTML("afterbegin", `<div class="container"><h3>No items</h3></div>`);
         // ПИСАТИ ВСЕ ТУТ НИЖЧЕ!!!!!!!
 
         const request = new Request().get('');
         request.then(data => {
+            if (data.length === 0) {
+                root.insertAdjacentHTML("afterbegin", `
+                    <div class="container" id="no-items">
+                    <h3 class="no-items" id="noItems">No items have been added</h3>
+                    </div>`);
+            }
             const liArray = data.map(obj => {
                 return new Visit(obj).renderShortCard();
             });

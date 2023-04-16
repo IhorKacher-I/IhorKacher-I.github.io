@@ -75,6 +75,14 @@ export class Visit {
             const request = new Request();
             card.closest(`[id="${this.id}"]`).remove();
             request.delete(this.id);
+
+            const cards = document.querySelectorAll(".card");
+            if(cards.length === 0) {
+                root.insertAdjacentHTML("afterbegin", `
+                    <div class="container" id="no-items">
+                    <h3 class="no-items" id="noItems">No items have been added</h3>
+                    </div>`);
+            }
         });
 
         //  const BtnEdit = card.querySelector(".button__trash");
@@ -94,7 +102,9 @@ export class Visit {
             deleteBtn.addEventListener('click', (event) => {
                 new Request().delete(this.id).then(data => {
                     card.closest(`[id="${this.id}"]`).remove();
-                    document.querySelector('.modal-window').remove();
+                    document.querySelector('#modal').remove();
+                    body.style["overflow-y"] = "";
+
                 });
             });
 

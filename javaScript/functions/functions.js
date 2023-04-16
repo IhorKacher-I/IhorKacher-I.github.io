@@ -1,6 +1,6 @@
 import Request from "../modules/Request.js";
 import {Modal} from "../modules/Modal.js";
-import { root } from "../constants/const.js";
+import { root, body } from "../constants/const.js";
 import FormBuilder from "../modules/form/FormBuilder.js";
 import { Visit } from "../modules/Visit.js";
 import FormDirector from "../modules/form/FormDirector.js";
@@ -13,8 +13,9 @@ export function removeElementCollection(className) {
         field.remove();
     })
 }
-export function changeDoctorFields(formWindow, form, select) {
-    select.addEventListener('change', () => {
+export function changeDoctorFields(modalWindow, form, select) {
+    let formWindow = modalWindow.firstChild;
+    select.addEventListener('change', (event) => {
         switch (event.target.value) {
             case 'cardiologist': {
                 removeElementCollection('.additional-fields');
@@ -60,12 +61,20 @@ export function createVisitObj() {
 export function handleFormSubmit(event, createVisit) {
     event.preventDefault();
     const promiseObj = new Request().post("", createVisitObj());
+
     promiseObj.then(obj => {
         new Visit(obj).renderShortCard();
-        document.querySelector('.modal-window').remove();
+        document.querySelector('#modal').remove();
+        body.style["overflow-y"] = "";
+
         const sectionCards = document.querySelector(".cards-list");
         sectionCards.prepend(new Visit(obj).renderShortCard());
     });
+
+    const noItemsDiv = document.querySelector("#no-items");
+    if(noItemsDiv) {
+        noItemsDiv.remove();
+    }
 }
 
 export function setupFormEventListeners(createVisit, formDirector) {

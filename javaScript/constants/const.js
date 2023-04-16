@@ -1,3 +1,4 @@
+export const body = document.querySelector("body");
 export const root = document.querySelector("#main");
 export const BASE_URL = "https://ajax.test-danit.com/api/v2/cards";
 export const COOKIE_TOKEN_NAME = "token";
