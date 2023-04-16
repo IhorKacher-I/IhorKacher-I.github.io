@@ -577,6 +577,45 @@ ul {
   fill: #ee3120;
 }
 
+/**       CREATE VISIT STYLES         **/
+.modal-window {
+  position: absolute;
+  z-index: 1000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: max-content;
+  width: 900px;
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 20px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+  padding: 35px;
+}
+.modal-window__header {
+  margin: 0 auto 30px auto;
+  text-align: center;
+}
+/*.modal-window__header {*/
+.header__title {
+  margin: 0;
+  color: #3b3f61;
+  font-size: 36px;
+  line-height: 20px;
+  font-weight: 500;
+}
+/* Close button */
+.header__close-button {
+  cursor: pointer;
+  position: absolute;
+  top: 35px;
+  right: 35px;
+  height: 13px;
+  width: 13px;
+}
+.header__close-button:hover svg path {
+  fill: #ee3120;
+}
 /*********Close button end*************/
 
 .create-visit__form {
@@ -686,3 +725,155 @@ ul {
 .create-visit__submit:hover {
   background: #3d0f66;
 }
+/**       CREATE VISIT STYLES END        **/
+
+/**       CARDS STYLES         **/
+.cards {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #fff;
+}
+.cards-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.card {
+  display: flex;
+  justify-content: space-between;
+  width: 568px;
+  height: 168px;
+  border: 1px solid #eeeff5;
+  border-radius: 32px;
+  padding: 30px;
+  margin-top: 30px;
+  background-color: #ffffff;
+}
+.card:hover {
+  border: 1px solid #f58512;
+}
+
+.card__info {
+}
+.card__name {
+  margin: 0;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #3b3f61;
+}
+.card__doctor {
+  margin: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #686b84;
+}
+.card__more {
+  padding-top: 2em;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #686b84;
+  cursor: pointer;
+}
+.card__more:hover {
+  color: #541a81;
+}
+
+.card__navigation {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.button__trash {
+}
+.button__edit {
+}
+.hide {
+  display: none;
+}
+
+.logout__button,
+.add-visit__button {
+  width: 36px;
+  height: 36px;
+  padding: 10px 8px;
+}
+
+.add-visit__button {
+  margin-left: auto;
+  margin-right: 20px;
+}
+/**       CARDS STYLES END        **/
+
+/**      FULL INFO WINDOW         **/
+.full-visit-information__body {
+  height: 100%;
+
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.doctor__label,
+.priority__label,
+.patient-name__label,
+.visit-purpose__label,
+.visit-description__label,
+.patient-age__label,
+.patient-bmi__label,
+.patient-diseases__label,
+.pressure__label,
+.patient-last-visit__label {
+  color: #3b3f61;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.doctor__name,
+.priority__name,
+.patient-name__value,
+.visit-purpose__value,
+.visit-description__value,
+.patient-age__value,
+.patient-bmi__value,
+.patient-diseases__value,
+.pressure__value,
+.patient-last-visit__value {
+  position: absolute;
+  left: 25%;
+
+  color: #3b3f61;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.full-visit-information__buttons {
+  margin-left: auto;
+}
+.buttons__edit-button {
+  cursor: pointer;
+
+  height: 21px;
+  width: 15px;
+}
+.buttons__delete-button {
+  cursor: pointer;
+  margin-left: 17px;
+  height: 20px;
+  width: 20px;
+}
+
+.buttons__edit-button:hover svg path {
+  stroke: #2ba60b;
+}
+.buttons__delete-button:hover svg path {
+  fill: #ee3120;
+}
+/**      FULL INFO WINDOW END     **/
