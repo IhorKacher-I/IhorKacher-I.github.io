@@ -36,9 +36,11 @@ export class Modal {
 
         }
 
-        modal.addEventListener("click", () => {
-            modal.remove();
-            body.style["overflow-y"] = "";
+        modal.addEventListener("click", (event) => {
+            if(event.target.className === "modal"){
+                modal.remove();
+                body.style["overflow-y"] = "";
+            }
         });
 
         return modal;
