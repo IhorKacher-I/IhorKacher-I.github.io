@@ -1,3 +1,12 @@
+import Request from "../modules/Request.js";
+import {Modal} from "../modules/Modal.js";
+import { root } from "../constants/const.js";
+import FormBuilder from "../modules/form/FormBuilder.js";
+import { Visit } from "../modules/Visit.js";
+import FormDirector from "../modules/form/FormDirector.js";
+
+
+
 
 export function removeElementCollection(className) {
     document.querySelectorAll(className).forEach(field => {
@@ -48,3 +57,49 @@ export function createVisitObj() {
 
     return Object.fromEntries(validObjEntries);
 }
+export function handleFormSubmit(event, createVisit) {
+    event.preventDefault();
+    const promiseObj = new Request().post("", createVisitObj());
+    promiseObj.then(obj => {
+        new Visit(obj).renderShortCard();
+        document.querySelector('.modal-window').remove();
+        const sectionCards = document.querySelector(".cards-list");
+        sectionCards.prepend(new Visit(obj).renderShortCard());
+    });
+}
+
+export function setupFormEventListeners(createVisit, formDirector) {
+    let doctorSelect = document.querySelector('.create-visit__doctor');
+    changeDoctorFields(createVisit, formDirector, doctorSelect);
+
+    createVisit.lastChild.addEventListener('submit', (event) => {
+        handleFormSubmit(event, createVisit);
+    });
+}
+
+export function addVisit() {
+    //todo scroll, blur background та закриття по кліку поза вікном
+    const createVisitForm = new FormBuilder(["create-visit__form"], "create-visit__form");
+    const formDirector = new FormDirector();
+    formDirector.setBuilder(createVisitForm);
+    formDirector.buildCreateVisitForm();
+
+    const createVisit = new Modal('Create visit', createVisitForm.form).render();
+    root.append(createVisit);
+
+    setupFormEventListeners(createVisit, formDirector);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

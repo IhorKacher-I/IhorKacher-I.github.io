@@ -148,6 +148,7 @@
 /**       CREATE VISIT STYLES         **/
 .modal-window {
     position: absolute;
+    z-index: 1000;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -379,3 +380,74 @@
     margin-right: 20px;
 }
 /**       CARDS STYLES END        **/
+
+/**      FULL INFO WINDOW         **/
+.full-visit-information__body {
+    height: 100%;
+
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    gap: 25px;
+}
+
+
+.doctor__label,
+.priority__label,
+.patient-name__label,
+.visit-purpose__label,
+.visit-description__label,
+.patient-age__label,
+.patient-bmi__label,
+.patient-diseases__label,
+.pressure__label,
+.patient-last-visit__label {
+    color: #3B3F61;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.doctor__name,
+.priority__name,
+.patient-name__value,
+.visit-purpose__value,
+.visit-description__value,
+.patient-age__value,
+.patient-bmi__value,
+.patient-diseases__value,
+.pressure__value,
+.patient-last-visit__value {
+    position: absolute;
+    left: 25%;
+
+    color: #3B3F61;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.full-visit-information__buttons {
+    margin-left: auto;
+}
+.buttons__edit-button {
+    cursor: pointer;
+
+    height: 21px;
+    width: 15px;
+}
+.buttons__delete-button {
+    cursor: pointer;
+    margin-left: 17px;
+    height: 20px;
+    width: 20px;
+}
+
+
+.buttons__edit-button:hover svg path {
+    stroke: #2ba60b;
+}
+.buttons__delete-button:hover svg path {
+    fill: #EE3120;
+}
+/**      FULL INFO WINDOW END     **/

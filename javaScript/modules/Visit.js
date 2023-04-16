@@ -1,5 +1,6 @@
 import Request from "./Request.js";
-
+import {Modal} from "./Modal.js";
+import {root} from "../constants/const.js";
 export class Visit {
     constructor({
                     doctorName,
@@ -9,6 +10,12 @@ export class Visit {
                     description,
                     patientName,
                     id,
+
+                    lastVisit,
+                    age,
+                    diseases,
+                    bodyMassIndex,
+                    normalPressure,
                 }) {
         this.doctorName = doctorName;
         this.priority = priority;
@@ -17,6 +24,12 @@ export class Visit {
         this.description = description;
         this.patientName = patientName;
         this.id = id;
+
+        age !== undefined ? this.age = age : null;
+        lastVisit !== undefined ? this.lastVisit = lastVisit : null;
+        diseases !== undefined ? this.diseases = diseases : null;
+        bodyMassIndex !== undefined ? this.bodyMassIndex = bodyMassIndex : null;
+        normalPressure !== undefined ? this.normalPressure = normalPressure : null;
     }
     renderShortCard() {
         const card = document.createElement("li");
@@ -74,7 +87,22 @@ export class Visit {
 
         const btnMore = card.querySelector(".card__more");
         btnMore.addEventListener("click", () => {
-            //створюю new Modal("Information about the visit", {} - object картки на яку натискаємо) + method showFullInfo()
+            const fullInfoWindow = new Modal('Information about the visit', this).render();
+            root.append(fullInfoWindow);
+
+            const deleteBtn = document.querySelector('.buttons__delete-button');
+            deleteBtn.addEventListener('click', (event) => {
+                new Request().delete(this.id).then(data => {
+                    card.closest(`[id="${this.id}"]`).remove();
+                    document.querySelector('.modal-window').remove();
+                });
+            });
+
+            const editBtn = document.querySelector('.buttons__edit-button');
+                editBtn.addEventListener('click', (event) => {
+                    console.log('edit visit form')
+
+                });
         });
         //  console.log(this.renderFullInfo);
 
