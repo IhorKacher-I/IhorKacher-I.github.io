@@ -26,6 +26,7 @@ export default class FormBuilder {
         this.#form.append(title);
     }
 
+
     addLabel(classList = [], target = "", textContent = "") {
         const label = createHTMLElement("label", classList, {textContent});
         label.setAttribute("for", target);
