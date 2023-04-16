@@ -227,9 +227,12 @@ ul {
   flex-direction: column;
   justify-content: space-between;
 }
-.button__trash {
-}
+.button__trash,
 .button__edit {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 .hide {
   display: none;
@@ -358,6 +361,14 @@ ul {
   margin-right: 20px;
 }
 
+/* -------------- */
+.form__create-visit {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 35%);
+  height: 464px;
+}
 /*---------login-form-------------*/
 /*.login-form {*/
 /*    position: absolute;*/
@@ -432,3 +443,246 @@ ul {
 /*    line-height: 18px;*/
 /*    color: #FFFFFF;*/
 /*}*/
+
+/**       CREATE VISIT STYLES         **/
+.modal-window {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: max-content;
+  width: 900px;
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 20px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+  padding: 35px;
+}
+
+.create-visit__header {
+  border-bottom: 1px solid #e6e6e6;
+}
+.header__title {
+  margin: 0 auto 30px auto;
+  width: max-content;
+}
+.modal-window__header {
+  margin: 0 auto 30px auto;
+  text-align: center;
+}
+/*.modal-window__header {*/
+.header__title {
+  margin: 0;
+  color: #3b3f61;
+  font-size: 36px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.create-visit__selects {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: center;
+  padding: 10px;
+}
+
+.create-visit__purpose {
+  padding: 10px;
+}
+
+.create-visit__description {
+  padding: 10px;
+}
+
+.create-visit__name {
+  padding: 10px;
+}
+
+.create-visit__submit {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  padding: 10px;
+}
+
+/* Selects */
+.create-visit__selects {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.doctor__select,
+.priority__select {
+  color: #686b84;
+  height: 40px;
+  border-radius: 8px;
+  background: #eeeff5;
+  border: 0;
+  width: 100%;
+  padding: 10px;
+}
+.doctor__select option,
+.priority__select option {
+  height: 40px;
+  background: #eeeff5;
+  border: 0;
+  font-size: 16px;
+  line-height: 20px;
+}
+/* Textareas */
+.purpose__input,
+.description__textarea,
+.name__input {
+  border: 0;
+  background: #eeeff5;
+  border-radius: 8px;
+  font-size: 16px;
+  padding: 10px;
+  resize: none;
+  width: 100%;
+  height: 40px;
+}
+.description__textarea {
+  height: 80px;
+}
+
+/* Button */
+.submit__button {
+  background: linear-gradient(90deg, #f58512 0%, #ee3120 100%);
+  border-radius: 13px;
+  border: 0;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 300;
+  cursor: pointer;
+  padding: 0;
+  height: 35px;
+  width: 35px;
+}
+
+.submit__button:hover {
+  background: #3d0f66;
+}
+
+/* Close button */
+.header__close-button {
+  cursor: pointer;
+  position: absolute;
+  top: 35px;
+  right: 35px;
+  height: 13px;
+  width: 13px;
+}
+.header__close-button:hover svg path {
+  fill: #ee3120;
+}
+
+/*********Close button end*************/
+
+.create-visit__form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+.create-visit__doctor {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+.create-visit__priority {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+.create-visit__status {
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+}
+.create-visit__purpose {
+  grid-column: 1 / 4;
+  grid-row: 2 / 3;
+}
+.create-visit__description {
+  grid-column: 1 / 4;
+  grid-row: 3 / 4;
+}
+.create-visit__name {
+  grid-column: 1 / 4;
+  grid-row: 4 / 5;
+}
+.create-visit__submit {
+  grid-column: 1 / 4;
+  margin-left: auto;
+}
+/*cardiologist fields*/
+.create-visit__pressure,
+.create-visit__last-visit,
+.create-visit__therapist-age-field {
+  grid-column: 1 / 2;
+  grid-row: 5 / 6;
+}
+.create-visit__bmi {
+  grid-column: 2 / 3;
+  grid-row: 5 / 6;
+}
+.create-visit__age {
+  grid-column: 3 / 4;
+  grid-row: 5 / 6;
+}
+.create-visit__diseases {
+  grid-column: 1 / 4;
+  grid-row: 6 / 7;
+}
+/* Selects */
+.create-visit__doctor,
+.create-visit__priority,
+.create-visit__status {
+  color: #686b84;
+  height: 40px;
+  border-radius: 8px;
+  background: #eeeff5;
+  border: 0;
+  width: 100%;
+  padding: 10px;
+}
+.create-visit__doctor option,
+.create-visit__priority option {
+  font-size: 16px;
+  line-height: 20px;
+}
+.create-visit__purpose,
+.create-visit__description,
+.create-visit__name,
+.create-visit__pressure,
+.create-visit__bmi,
+.create-visit__age,
+.create-visit__diseases,
+.create-visit__last-visit,
+.create-visit__therapist-age-field {
+  border: 0;
+  background: #eeeff5;
+  border-radius: 8px;
+  font-size: 16px;
+  padding: 10px;
+  resize: none;
+  width: 100%;
+  height: 40px;
+}
+.create-visit__description,
+.create-visit__diseases {
+  height: 80px;
+}
+/* Button */
+.create-visit__submit {
+  background: linear-gradient(90deg, #f58512 0%, #ee3120 100%);
+  border-radius: 13px;
+  border: 0;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 300;
+  cursor: pointer;
+  padding: 0;
+  height: 35px;
+  width: 35px;
+}
+.create-visit__submit:hover {
+  background: #3d0f66;
+}
