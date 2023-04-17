@@ -30,7 +30,7 @@ window.addEventListener("load", () => {
     request.then((data) => {
       if (data.length === 0) {
         root.insertAdjacentHTML(
-          "afterbegin",
+          "beforeEnd",
           `
                     <div class="container" id="no-items">
                     <h3 class="no-items" id="noItems">No items have been added</h3>

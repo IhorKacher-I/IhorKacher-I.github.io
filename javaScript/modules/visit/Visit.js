@@ -1,36 +1,34 @@
 import Request from "../Request.js";
-import {Modal} from "../Modal.js";
-import {root, body} from "../../constants/const.js";
+import { Modal } from "../Modal.js";
+import { root, body } from "../../constants/const.js";
 
 export class Visit {
-    constructor(
-        {
-            doctorName,
-            priority,
-            status,
-            purposeVisit,
-            description,
-            patientName,
-            id,
-        }
-    ) {
-        this.doctorName = doctorName;
-        this.priority = priority;
-        this.status = status;
-        this.purposeVisit = purposeVisit;
-        this.description = description;
-        this.patientName = patientName;
-        this.id = id;
-        this.status = "Open";
-    }
+  constructor({
+    doctorName,
+    priority,
+    status,
+    purposeVisit,
+    description,
+    patientName,
+    id,
+  }) {
+    this.doctorName = doctorName;
+    this.priority = priority;
+    this.status = status;
+    this.purposeVisit = purposeVisit;
+    this.description = description;
+    this.patientName = patientName;
+    this.id = id;
+    this.status = "Open";
+  }
 
-    renderShortCard() {
-        const card = document.createElement("li");
-        card.classList.add("card");
-        card.id = `${this.id}`;
-        card.dataset.priority = `${this.priority}`;
-        card.dataset.status = `${this.status}`;
-        card.innerHTML = `
+  renderShortCard() {
+    const card = document.createElement("li");
+    card.classList.add("card");
+    card.id = `${this.id}`;
+    card.dataset.priority = `${this.priority}`;
+    card.dataset.status = `${this.status}`;
+    card.innerHTML = `
 			 <div class="card__info">
 				<h4 class="card__name">
 					${this.patientName}
@@ -62,52 +60,56 @@ export class Visit {
 			</button>
 		</div>`;
 
-        const BtnDelet = card.querySelector(".button__trash");
-        BtnDelet.addEventListener("click", (event) => {
-            event.target.closest("button__trash");
-            const request = new Request();
-            card.closest(`[id="${this.id}"]`).remove();
-            request.delete(this.id);
+    const BtnDelet = card.querySelector(".button__trash");
+    BtnDelet.addEventListener("click", (event) => {
+      event.target.closest("button__trash");
+      const request = new Request();
+      card.closest(`[id="${this.id}"]`).remove();
+      request.delete(this.id);
 
-            const cards = document.querySelectorAll(".card");
-            if (cards.length === 0) {
-                root.insertAdjacentHTML("afterbegin", `
+      const cards = document.querySelectorAll(".card");
+      if (cards.length === 0) {
+        root.insertAdjacentHTML(
+          "beforeEnd",
+          `
                     <div class="container" id="no-items">
                     <h3 class="no-items" id="noItems">No items have been added</h3>
-                    </div>`);
-            }
+                    </div>`
+        );
+      }
+    });
+
+    //  const BtnEdit = card.querySelector(".button__trash");
+    //  BtnEdit.addEventListener("click", (event) => {
+    //    event.target.closest("button__edit");
+    //    const request = new Request();
+    //    card.closest(`[id="${this.id}"]`);
+    //    request.put(this.id);
+    //  });
+
+    const btnMore = card.querySelector(".card__more");
+    btnMore.addEventListener("click", () => {
+      const fullInfoWindow = new Modal(
+        "Information about the visit",
+        this
+      ).render();
+      root.append(fullInfoWindow);
+
+      const deleteBtn = document.querySelector(".buttons__delete-button");
+      deleteBtn.addEventListener("click", (event) => {
+        new Request().delete(this.id).then((data) => {
+          card.closest(`[id="${this.id}"]`).remove();
+          document.querySelector("#modal").remove();
+          body.style["overflow-y"] = "";
         });
+      });
 
-        //  const BtnEdit = card.querySelector(".button__trash");
-        //  BtnEdit.addEventListener("click", (event) => {
-        //    event.target.closest("button__edit");
-        //    const request = new Request();
-        //    card.closest(`[id="${this.id}"]`);
-        //    request.put(this.id);
-        //  });
+      const editBtn = document.querySelector(".buttons__edit-button");
+      editBtn.addEventListener("click", (event) => {
+        console.log("edit visit form");
+      });
+    });
 
-        const btnMore = card.querySelector(".card__more");
-        btnMore.addEventListener("click", () => {
-            const fullInfoWindow = new Modal('Information about the visit', this).render();
-            root.append(fullInfoWindow);
-
-            const deleteBtn = document.querySelector('.buttons__delete-button');
-            deleteBtn.addEventListener('click', (event) => {
-                new Request().delete(this.id).then(data => {
-                    card.closest(`[id="${this.id}"]`).remove();
-                    document.querySelector('#modal').remove();
-                    body.style["overflow-y"] = "";
-
-                });
-            });
-
-            const editBtn = document.querySelector('.buttons__edit-button');
-            editBtn.addEventListener('click', (event) => {
-                console.log('edit visit form')
-
-            });
-        });
-
-        return card;
-    }
+    return card;
+  }
 }
