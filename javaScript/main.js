@@ -4,7 +4,11 @@ import User from "./modules/User.js";
 import Request from "./modules/Request.js";
 import {root} from "./constants/const.js";
 import {addVisit} from "./functions/functions.js";
-import {Visit} from "./modules/Visit.js";
+import {VisitDentist} from "./modules/visit/VisitDentist.js";
+import {VisitCardiologist} from "./modules/visit/VisitCardiologist.js";
+import {VisitTherapist} from "./modules/visit/VisitTherapist.js";
+import FormBuilder from "./modules/form/FormBuilder.js";
+import FormDirector from "./modules/form/FormDirector.js";
 
 window.addEventListener("load", () => {
     const logInBtn = document.querySelector("#logout-btn");
@@ -25,6 +29,12 @@ window.addEventListener("load", () => {
         getTokenFromCookie();
         // ПИСАТИ ВСЕ ТУТ НИЖЧЕ!!!!!!!
 
+        const builder = new FormBuilder(["search-form"],  "search-form");
+        const director = new FormDirector();
+        director.setBuilder(builder);
+        director.buildFilterForm();
+        document.querySelector(".filters").append(builder.form);
+
         const request = new Request().get('');
         request.then(data => {
             if (data.length === 0) {
@@ -34,7 +44,14 @@ window.addEventListener("load", () => {
                     </div>`);
             }
             const liArray = data.map(obj => {
-                return new Visit(obj).renderShortCard();
+                switch (obj.doctorName) {
+                    case "dentist":
+                        return new VisitDentist(obj).renderShortCard();
+                    case "cardiologist":
+                        return new VisitCardiologist(obj).renderShortCard();
+                    default:
+                        return new VisitTherapist(obj).renderShortCard();
+                }
             });
             document.querySelector(".cards-list").append(...liArray);
         });

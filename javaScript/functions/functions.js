@@ -2,10 +2,10 @@ import Request from "../modules/Request.js";
 import {Modal} from "../modules/Modal.js";
 import { root, body } from "../constants/const.js";
 import FormBuilder from "../modules/form/FormBuilder.js";
-import { Visit } from "../modules/Visit.js";
 import FormDirector from "../modules/form/FormDirector.js";
-
-
+import {VisitDentist} from "../modules/visit/VisitDentist.js";
+import {VisitCardiologist} from "../modules/visit/VisitCardiologist.js";
+import {VisitTherapist} from "../modules/visit/VisitTherapist.js";
 
 
 export function removeElementCollection(className) {
@@ -44,7 +44,7 @@ export function createVisitObj() {
         ['purposeVisit',    document.querySelector('.create-visit__purpose').value],
         ['description',     document.querySelector('.create-visit__description').value],
         ['patientName',     document.querySelector('.create-visit__name').value],
-        ['status',          document.querySelector('.create-visit__status').value],
+        // ['status',          document.querySelector('.create-visit__status').value],
 
         ['normalPressure',  document.querySelector('.create-visit__pressure')?.value],
         ['bodyMassIndex',   document.querySelector('.create-visit__bmi')?.value],
@@ -63,12 +63,22 @@ export function handleFormSubmit(event, createVisit) {
     const promiseObj = new Request().post("", createVisitObj());
 
     promiseObj.then(obj => {
-        new Visit(obj).renderShortCard();
+        let visitCard;
+        switch (obj.doctorName) {
+            case "dentist":
+                visitCard = new VisitDentist(obj).renderShortCard();
+                break;
+            case "cardiologist":
+                visitCard = new VisitCardiologist(obj).renderShortCard();
+                break;
+            default:
+                visitCard = new VisitTherapist(obj).renderShortCard();
+        }
         document.querySelector('#modal').remove();
         body.style["overflow-y"] = "";
 
         const sectionCards = document.querySelector(".cards-list");
-        sectionCards.prepend(new Visit(obj).renderShortCard());
+        sectionCards.prepend(visitCard);
     });
 
     const noItemsDiv = document.querySelector("#no-items");
@@ -87,7 +97,6 @@ export function setupFormEventListeners(createVisit, formDirector) {
 }
 
 export function addVisit() {
-    //todo scroll, blur background та закриття по кліку поза вікном
     const createVisitForm = new FormBuilder(["create-visit__form"], "create-visit__form");
     const formDirector = new FormDirector();
     formDirector.setBuilder(createVisitForm);

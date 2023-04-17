@@ -11,6 +11,43 @@ export default class FormDirector {
         this.#builder = builder;
     }
 
+    buildFilterForm() {
+        function submitHandler(e) {
+            e.preventDefault();
+            let arr = Array.from(e.target.children);
+            const obj = {};
+            arr.forEach(el => {
+                if(el.tagName !== "button") {
+                    console.log(el);
+                }
+            })
+            console.log(e.target.children[0].value);
+            const formData = new FormData(e.target);
+            console.log(Object.fromEntries(formData));
+            //
+            // User.logIn(Object.fromEntries(formData)).then(data => {
+            //     if(data) {
+            //         window.location.href = 'index.html';
+            //     }
+            // });
+        }
+
+        this.#builder.addInput(["search__input"],"search-input", "text", "searchFor", false);
+        this.#builder.addSelect(['search__status'], false, [
+            { value: "all", textContent: "All" },
+            { value: "open", textContent: "Open" },
+            { value: "done", textContent: "Done" },
+        ]);
+        this.#builder.addSelect(['search__priority'], false, [
+            { value: "all", textContent: "All" },
+            { value: "high", textContent: "High" },
+            { value: "normal", textContent: "Normal" },
+            { value: "low", textContent: "Low" },
+        ], );
+        this.#builder.addButton(["button", "search__button"], "search-btn", "submit", "Search");
+        this.#builder.addEventListener("submit", submitHandler);
+    }
+
     buildLoginForm() {
         function submitHandler(e) {
             e.preventDefault();
@@ -44,11 +81,6 @@ export default class FormDirector {
             { value: "high", textContent: "High" },
             { value: "normal", textContent: "Normal" },
             { value: "low", textContent: "Low" },
-        ], );
-
-        this.#builder.addSelect(['create-visit__status'], true, [
-            { value: "open", textContent: "Open" },
-            { value: "done", textContent: "Done" },
         ], );
 
         this.#builder.addInput(["create-visit__purpose"],"", "text", "", true, 'The purpose of the visit?');

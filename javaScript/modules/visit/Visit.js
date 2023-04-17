@@ -1,6 +1,6 @@
-import Request from "./Request.js";
-import {Modal} from "./Modal.js";
-import {root} from "../constants/const.js";
+import Request from "../Request.js";
+import {Modal} from "../Modal.js";
+import {root, body} from "../../constants/const.js";
 
 export class Visit {
     constructor(
@@ -21,7 +21,7 @@ export class Visit {
         this.description = description;
         this.patientName = patientName;
         this.id = id;
-        this.status = "open";
+        this.status = "Open";
     }
 
     renderShortCard() {
@@ -107,7 +107,6 @@ export class Visit {
 
             });
         });
-        //  console.log(this.renderFullInfo);
 
         return card;
     }
