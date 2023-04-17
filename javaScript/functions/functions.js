@@ -7,35 +7,37 @@ import {VisitDentist} from "../modules/visit/VisitDentist.js";
 import {VisitCardiologist} from "../modules/visit/VisitCardiologist.js";
 import {VisitTherapist} from "../modules/visit/VisitTherapist.js";
 
-
 export function removeElementCollection(className) {
-    document.querySelectorAll(className).forEach(field => {
-        field.remove();
-    })
+  document.querySelectorAll(className).forEach((field) => {
+    field.remove();
+  });
 }
 export function changeDoctorFields(modalWindow, form, select) {
-    let formWindow = modalWindow.firstChild;
-    select.addEventListener('change', (event) => {
-        switch (event.target.value) {
-            case 'cardiologist': {
-                removeElementCollection('.additional-fields');
-                formWindow.lastChild.append(...form.addCardiologistFields());
-            }
-                break;
-            case 'dentist': {
-                removeElementCollection('.additional-fields');
-                formWindow.lastChild.append(form.addDentistFields());
-            }
-                break;
-            case 'therapist': {
-                removeElementCollection('.additional-fields');
-                formWindow.lastChild.append(form.addTherapistFields());
-            }
-                break;
-            default:
-                removeElementCollection('.additional-fields');
+  let formWindow = modalWindow.firstChild;
+  select.addEventListener("change", (event) => {
+    switch (event.target.value) {
+      case "Cardiologist":
+        {
+          removeElementCollection(".additional-fields");
+          formWindow.lastChild.append(...form.addCardiologistFields());
         }
-    })
+        break;
+      case "Dentist":
+        {
+          removeElementCollection(".additional-fields");
+          formWindow.lastChild.append(form.addDentistFields());
+        }
+        break;
+      case "Therapist":
+        {
+          removeElementCollection(".additional-fields");
+          formWindow.lastChild.append(form.addTherapistFields());
+        }
+        break;
+      default:
+        removeElementCollection(".additional-fields");
+    }
+  });
 }
 export function createVisitObj() {
     const objEntries = [
@@ -44,7 +46,6 @@ export function createVisitObj() {
         ['purposeVisit',    document.querySelector('.create-visit__purpose').value],
         ['description',     document.querySelector('.create-visit__description').value],
         ['patientName',     document.querySelector('.create-visit__name').value],
-        // ['status',          document.querySelector('.create-visit__status').value],
 
         ['normalPressure',  document.querySelector('.create-visit__pressure')?.value],
         ['bodyMassIndex',   document.querySelector('.create-visit__bmi')?.value],
@@ -68,10 +69,10 @@ export function handleFormSubmit(event, createVisit) {
 
         let visitCard;
         switch (obj.doctorName) {
-            case "dentist":
+            case "Dentist":
                 visitCard = new VisitDentist(obj).renderShortCard();
                 break;
-            case "cardiologist":
+            case "Cardiologist":
                 visitCard = new VisitCardiologist(obj).renderShortCard();
                 break;
             default:
@@ -84,19 +85,19 @@ export function handleFormSubmit(event, createVisit) {
         sectionCards.prepend(visitCard);
     });
 
-    const noItemsDiv = document.querySelector("#no-items");
-    if(noItemsDiv) {
-        noItemsDiv.remove();
-    }
+  const noItemsDiv = document.querySelector("#no-items");
+  if (noItemsDiv) {
+    noItemsDiv.remove();
+  }
 }
 
 export function setupFormEventListeners(createVisit, formDirector) {
-    let doctorSelect = document.querySelector('.create-visit__doctor');
-    changeDoctorFields(createVisit, formDirector, doctorSelect);
+  let doctorSelect = document.querySelector(".create-visit__doctor");
+  changeDoctorFields(createVisit, formDirector, doctorSelect);
 
-    createVisit.lastChild.addEventListener('submit', (event) => {
-        handleFormSubmit(event, createVisit);
-    });
+  createVisit.lastChild.addEventListener("submit", (event) => {
+    handleFormSubmit(event, createVisit);
+  });
 }
 
 export function addVisit() {
@@ -110,17 +111,3 @@ export function addVisit() {
 
     setupFormEventListeners(createVisit, formDirector);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

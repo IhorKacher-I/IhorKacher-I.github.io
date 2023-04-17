@@ -33,12 +33,12 @@ export default class FormBuilder {
         this.#form.append(label);
     }
 
-    addInput(classList = [], id = "", type = "", name = "", required = false, placeholder = '' ) {
-        const input = createHTMLElement("input", classList, {id, type, name, required, placeholder});
+    addInput(classList = [], id = "", type = "", name = "", required = false, placeholder = '', autocomplete= "on" ) {
+        const input = createHTMLElement("input", classList, {id, type, name, required, placeholder, autocomplete});
         this.#form.append(input);
     }
-    addButton(classList = [], id = "", type = "", textContent = "") {
-        const button = createHTMLElement("button", classList, {id, type, textContent});
+    addButton(classList = [], id = "", type = "", innerHTML = "") {
+        const button = createHTMLElement("button", classList, {id, type, innerHTML});
         this.#form.append(button);
     }
     addSelect(classList = [], required = false, options = [],) {

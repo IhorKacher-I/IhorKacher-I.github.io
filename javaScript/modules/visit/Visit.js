@@ -28,15 +28,13 @@ export class Visit {
         const card = document.createElement("li");
         card.classList.add("card");
         card.id = `${this.id}`;
-        card.dataset.priority = `${this.priority}`;
-        card.dataset.status = `${this.status}`;
         card.innerHTML = `
 			 <div class="card__info">
 				<h4 class="card__name">
 					${this.patientName}
 				</h4>
 				<h5 class="card__doctor">${this.doctorName}</h5>
-				<p class="card__more">Показати більше</p>
+				<p class="card__more">Show more</p>
 			</div>
 			<div class="card__navigation card__button">
 			<button class="button__trash">
@@ -62,37 +60,26 @@ export class Visit {
 			</button>
 		</div>`;
 
-        const BtnDelet = card.querySelector(".button__trash");
-        BtnDelet.addEventListener("click", (event) => {
-            // event.target.closest("button__trash");
+        const BtnDelete = card.querySelector(".button__trash");
+        BtnDelete.addEventListener("click", (event) => {
             const request = new Request();
-            // TODO: search
             request.delete(this.id).then(data => {
                 if( data.status === 200) {
                     card.closest(`[id="${this.id}"]`).remove();
+
                     let index = arrForSearch.findIndex(el => el.id === this.id);
                     arrForSearch.splice(index, 1);
-                    console.log(arrForSearch);
-
                 }
-            });
-
-            const cards = document.querySelectorAll(".card");
-            if (cards.length === 0) {
-                root.insertAdjacentHTML("afterbegin", `
+            }).finally(()=> {
+                const cards = document.querySelectorAll(".card");
+                if (cards.length === 0) {
+                    root.insertAdjacentHTML("beforeend", `
                     <div class="container" id="no-items">
                     <h3 class="no-items" id="noItems">No items have been added</h3>
                     </div>`);
-            }
+                }
+            });
         });
-
-        //  const BtnEdit = card.querySelector(".button__trash");
-        //  BtnEdit.addEventListener("click", (event) => {
-        //    event.target.closest("button__edit");
-        //    const request = new Request();
-        //    card.closest(`[id="${this.id}"]`);
-        //    request.put(this.id);
-        //  });
 
         const btnMore = card.querySelector(".card__more");
         btnMore.addEventListener("click", () => {
@@ -101,20 +88,24 @@ export class Visit {
 
             const deleteBtn = document.querySelector('.buttons__delete-button');
             deleteBtn.addEventListener('click', (event) => {
-                // TODO:  search
-                // TODO:  код дублюється, по суті кнопка "видалити" робить одне і те ж, не залежно від того,
-                //        чи вона в маленькій карточці чи у великій. Варто винести (як і редагувати).  Ці функції
-                //        варто винести окремо і імпортувати де потрібно
 
-                new Request().delete(this.id).then(data => {
-                    if(data.status === 200) {
-                        card.closest(`[id="${this.id}"]`).remove();
+                const request = new Request();
+                request.delete(this.id).then(data => {
+                    if( data.status === 200) {
                         document.querySelector('#modal').remove();
                         body.style["overflow-y"] = "";
+                        card.closest(`[id="${this.id}"]`).remove();
 
                         let index = arrForSearch.findIndex(el => el.id === this.id);
                         arrForSearch.splice(index, 1);
-                        console.log(arrForSearch);
+                    }
+                }).finally(()=> {
+                    const cards = document.querySelectorAll(".card");
+                    if (cards.length === 0) {
+                        root.insertAdjacentHTML("beforeend", `
+                    <div class="container" id="no-items">
+                    <h3 class="no-items" id="noItems">No items have been added</h3>
+                    </div>`);
                     }
                 });
             });

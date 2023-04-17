@@ -4,7 +4,7 @@
  */
 import User from "../User.js";
 import createHTMLElement from "../../functions/createHTMLElement.js";
-import {arrForSearch} from "../../constants/const.js";
+import {arrForSearch, svgAddIcon} from "../../constants/const.js";
 
 export default class FormDirector {
     #builder;
@@ -17,27 +17,26 @@ export default class FormDirector {
         function submitHandler(e) {
             e.preventDefault();
             let formChildren = Array.from(e.target.children);
-            const obj = {};
+            const formData = {};
             formChildren.forEach(({className, value, tagName}) => {
                 if (tagName !== "BUTTON") {
                     switch (className) {
-                        case "search__input": {
-                            obj.text = value;
+                        case "filter__search": {
+                            formData.text = value;
                             break;
                         }
                         case "search__status": {
-                            obj.status = value === "all" ? "" : value;
+                            formData.status = value === "All" ? "" : value;
                             break;
                         }
                         default: {
-                            obj.priority = value === "all" ? "" : value;
+                            formData.priority = value === "All" ? "" : value;
                         }
                     }
                 }
             })
 
             const needToHide = [];
-
             arrForSearch.forEach(({
                                       doctorName, priority, status = "Open", purposeVisit, description,
                                       patientName, age = '', normalPressure = '',
@@ -46,12 +45,13 @@ export default class FormDirector {
                                   }) => {
                 const values = [doctorName, purposeVisit, description, patientName, age,
                     normalPressure, bodyMassIndex, diseases, lastVisit];
-                const includes = values.some(value => value.toLowerCase().includes(obj.text.toLowerCase().trim()));
+                const includes = values.some(value => value.toLowerCase().includes(formData.text.toLowerCase().trim()));
+
                 if (!includes) {
                     needToHide.push(id);
-                } else if (!priority.toLowerCase().includes(obj.priority.toLowerCase())) {
+                } else if (!priority.toLowerCase().includes(formData.priority.toLowerCase())) {
                     needToHide.push(id);
-                } else if (!status.includes(obj.status)) {
+                } else if (!status.toLowerCase().includes(formData.status.toLowerCase())) {
                     needToHide.push(id);
                 }
             });
@@ -65,20 +65,20 @@ export default class FormDirector {
                     document.getElementById(id.toString()).style.display = "flex";
                 })
             } else {
-                alert("No such items");
+                alert("No visit match the filter. Try again!");
                 formChildren.forEach(el => {
                     if (el.tagName !== "BUTTON") {
                         switch (el.className) {
-                            case "search__input": {
+                            case "filter__search": {
                                 el.value = "";
                                 break;
                             }
                             case "search__status": {
-                                el.value = "all";
+                                el.value = "All";
                                 break;
                             }
                             default: {
-                                el.value = "all";
+                                el.value = "All";
                             }
                         }
                     }
@@ -89,19 +89,19 @@ export default class FormDirector {
             }
         }
 
-        this.#builder.addInput(["search__input"], "search-input", "text", "searchFor", false);
+        this.#builder.addInput(["filter__search"], "search-input", "text", "searchFor", false, "Search ...", "off");
         this.#builder.addSelect(['search__status'], false, [
-            {value: "all", textContent: "All"},
-            {value: "open", textContent: "Open"},
-            {value: "done", textContent: "Done"},
+            {value: "All", textContent: "All"},
+            {value: "Open", textContent: "Open"},
+            {value: "Done", textContent: "Done"},
         ]);
         this.#builder.addSelect(['search__priority'], false, [
-            {value: "all", textContent: "All"},
-            {value: "high", textContent: "High"},
-            {value: "normal", textContent: "Normal"},
-            {value: "low", textContent: "Low"},
+            {value: "All", textContent: "All"},
+            {value: "High", textContent: "High"},
+            {value: "Normal", textContent: "Normal"},
+            {value: "Low", textContent: "Low"},
         ],);
-        this.#builder.addButton(["button", "search__button"], "search-btn", "submit", "Search");
+        this.#builder.addButton(["button", "filter__button"], "search-btn", "submit", "Search");
         this.#builder.addEventListener("submit", submitHandler);
     }
 
@@ -129,22 +129,21 @@ export default class FormDirector {
     buildCreateVisitForm() {
         this.#builder.addSelect(['create-visit__doctor'], true, [
             {value: "", textContent: "Choose a doctor"},
-            {value: "cardiologist", textContent: "Cardiologist"},
-            {value: "dentist", textContent: "Dentist"},
-            {value: "therapist", textContent: "Therapist"},
+            {value: "Cardiologist", textContent: "Cardiologist"},
+            {value: "Dentist", textContent: "Dentist"},
+            {value: "Therapist", textContent: "Therapist"},
         ]);
         this.#builder.addSelect(['create-visit__priority'], true, [
             {value: "", textContent: "Choose a priority"},
-            {value: "high", textContent: "High"},
-            {value: "normal", textContent: "Normal"},
-            {value: "low", textContent: "Low"},
+            {value: "High", textContent: "High"},
+            {value: "Normal", textContent: "Normal"},
+            {value: "Low", textContent: "Low"},
         ],);
 
         this.#builder.addInput(["create-visit__purpose"], "", "text", "", true, 'The purpose of the visit?');
         this.#builder.addTextarea(["create-visit__description"], "text", true, "Description");
         this.#builder.addInput(["create-visit__name"], "", "text", "", true, 'Enter full name:');
-        this.#builder.addButton(["create-visit__submit"], "", "submit", "+");
-
+        this.#builder.addButton(["create-visit__submit"], "", "submit", svgAddIcon);
     }
 
     addCardiologistFields() {
@@ -163,8 +162,6 @@ export default class FormDirector {
             }),
             createHTMLElement("textarea", ["create-visit__diseases", "additional-fields"], {placeholder: 'Diseases:'}),
         ]
-
-
     }
 
     addDentistFields() {

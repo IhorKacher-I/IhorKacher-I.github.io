@@ -1,4 +1,4 @@
-import {isLogin} from "./functions/isLogin.js";
+import { isLogin } from "./functions/isLogin.js";
 import getTokenFromCookie from "./functions/getTokenFromCookie.js";
 import User from "./modules/User.js";
 import Request from "./modules/Request.js";
@@ -7,53 +7,43 @@ import {addVisit} from "./functions/functions.js";
 import {VisitDentist} from "./modules/visit/VisitDentist.js";
 import {VisitCardiologist} from "./modules/visit/VisitCardiologist.js";
 import {VisitTherapist} from "./modules/visit/VisitTherapist.js";
-import FormBuilder from "./modules/form/FormBuilder.js";
-import FormDirector from "./modules/form/FormDirector.js";
+import {createFilterForm} from "./functions/createFilterForm.js";
 
 window.addEventListener("load", () => {
-    const logInBtn = document.querySelector("#logout-btn");
-    logInBtn.addEventListener("click", () => {
-        if (isLogin()) {
-            if (confirm("Do you want to log out?")) {
-                User.logOut();
-                window.location.href = "login.html";
-            }
-        }
-    })
+  const logOutBtn = document.querySelector("#logout-btn");
+  logOutBtn.addEventListener("click", () => {
+      if (confirm("Do you want to log out?")) {
+          User.logOut();
+          window.location.href = "login.html";
+      }
+  });
 
     const addVisitBtn = document.querySelector("#add-visit-header-btn");
     addVisitBtn.addEventListener("click", addVisit);
-
 
     if (isLogin()) {
         getTokenFromCookie();
         // ПИСАТИ ВСЕ ТУТ НИЖЧЕ!!!!!!!
 
-        // TODO: search-form
-        const builder = new FormBuilder(["search-form"],  "search-form");
-        const director = new FormDirector();
-        director.setBuilder(builder);
-        director.buildFilterForm();
-        document.querySelector(".filters").append(builder.form);
+       const filterForm = createFilterForm(["filter__header"],  "search-form");
+        document.querySelector(".filter__container").append(filterForm);
 
         const request = new Request().get('');
         request.then(data => {
             if (data.length === 0) {
-                root.insertAdjacentHTML("afterbegin", `
+                root.insertAdjacentHTML("beforeend", `
                     <div class="container" id="no-items">
                     <h3 class="no-items" id="noItems">No items have been added</h3>
                     </div>`);
             }
 
-            // TODO: search
-            // TODO: міняти цей масив потрібно і при оновленні карток
             arrForSearch.push(...data);
 
             const liArray = data.map(obj => {
                 switch (obj.doctorName) {
-                    case "dentist":
+                    case "Dentist":
                         return new VisitDentist(obj).renderShortCard();
-                    case "cardiologist":
+                    case "Cardiologist":
                         return new VisitCardiologist(obj).renderShortCard();
                     default:
                         return new VisitTherapist(obj).renderShortCard();
@@ -63,9 +53,6 @@ window.addEventListener("load", () => {
         });
 
     } else {
-        window.location.href = "login.html";
-    }
-})
-
-
-
+    window.location.href = "login.html";
+  }
+});

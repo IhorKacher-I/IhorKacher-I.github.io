@@ -1,10 +1,14 @@
-// TODO: search
 export const arrForSearch = [];
 export const body = document.querySelector("body");
 export const root = document.querySelector("#main");
 export const BASE_URL = "https://ajax.test-danit.com/api/v2/cards";
 export const COOKIE_TOKEN_NAME = "token";
 
+
+export const svgAddIcon = `
+    <svg class="add-visit-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 0H7V7H0V9H7V16H9V9H16V7H9V0Z" fill="white" />
+    </svg>`;
 
 export const svgCloseIcon = `
     <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
