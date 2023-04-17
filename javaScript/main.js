@@ -2,7 +2,7 @@ import {isLogin} from "./functions/isLogin.js";
 import getTokenFromCookie from "./functions/getTokenFromCookie.js";
 import User from "./modules/User.js";
 import Request from "./modules/Request.js";
-import {root} from "./constants/const.js";
+import {root,  arrForSearch} from "./constants/const.js";
 import {addVisit} from "./functions/functions.js";
 import {VisitDentist} from "./modules/visit/VisitDentist.js";
 import {VisitCardiologist} from "./modules/visit/VisitCardiologist.js";
@@ -29,6 +29,7 @@ window.addEventListener("load", () => {
         getTokenFromCookie();
         // ПИСАТИ ВСЕ ТУТ НИЖЧЕ!!!!!!!
 
+        // TODO: search-form
         const builder = new FormBuilder(["search-form"],  "search-form");
         const director = new FormDirector();
         director.setBuilder(builder);
@@ -43,6 +44,11 @@ window.addEventListener("load", () => {
                     <h3 class="no-items" id="noItems">No items have been added</h3>
                     </div>`);
             }
+
+            // TODO: search
+            // TODO: міняти цей масив потрібно і при оновленні карток
+            arrForSearch.push(...data);
+
             const liArray = data.map(obj => {
                 switch (obj.doctorName) {
                     case "dentist":

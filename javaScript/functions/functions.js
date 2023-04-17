@@ -1,6 +1,6 @@
 import Request from "../modules/Request.js";
 import {Modal} from "../modules/Modal.js";
-import { root, body } from "../constants/const.js";
+import { root, body, arrForSearch} from "../constants/const.js";
 import FormBuilder from "../modules/form/FormBuilder.js";
 import FormDirector from "../modules/form/FormDirector.js";
 import {VisitDentist} from "../modules/visit/VisitDentist.js";
@@ -63,6 +63,9 @@ export function handleFormSubmit(event, createVisit) {
     const promiseObj = new Request().post("", createVisitObj());
 
     promiseObj.then(obj => {
+        // TODO: search
+        arrForSearch.push(obj);
+
         let visitCard;
         switch (obj.doctorName) {
             case "dentist":

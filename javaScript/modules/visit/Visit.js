@@ -1,6 +1,6 @@
 import Request from "../Request.js";
 import {Modal} from "../Modal.js";
-import {root, body} from "../../constants/const.js";
+import {root, body, arrForSearch} from "../../constants/const.js";
 
 export class Visit {
     constructor(
@@ -64,10 +64,18 @@ export class Visit {
 
         const BtnDelet = card.querySelector(".button__trash");
         BtnDelet.addEventListener("click", (event) => {
-            event.target.closest("button__trash");
+            // event.target.closest("button__trash");
             const request = new Request();
-            card.closest(`[id="${this.id}"]`).remove();
-            request.delete(this.id);
+            // TODO: search
+            request.delete(this.id).then(data => {
+                if( data.status === 200) {
+                    card.closest(`[id="${this.id}"]`).remove();
+                    let index = arrForSearch.findIndex(el => el.id === this.id);
+                    arrForSearch.splice(index, 1);
+                    console.log(arrForSearch);
+
+                }
+            });
 
             const cards = document.querySelectorAll(".card");
             if (cards.length === 0) {
@@ -93,11 +101,21 @@ export class Visit {
 
             const deleteBtn = document.querySelector('.buttons__delete-button');
             deleteBtn.addEventListener('click', (event) => {
-                new Request().delete(this.id).then(data => {
-                    card.closest(`[id="${this.id}"]`).remove();
-                    document.querySelector('#modal').remove();
-                    body.style["overflow-y"] = "";
+                // TODO:  search
+                // TODO:  код дублюється, по суті кнопка "видалити" робить одне і те ж, не залежно від того,
+                //        чи вона в маленькій карточці чи у великій. Варто винести (як і редагувати).  Ці функції
+                //        варто винести окремо і імпортувати де потрібно
 
+                new Request().delete(this.id).then(data => {
+                    if(data.status === 200) {
+                        card.closest(`[id="${this.id}"]`).remove();
+                        document.querySelector('#modal').remove();
+                        body.style["overflow-y"] = "";
+
+                        let index = arrForSearch.findIndex(el => el.id === this.id);
+                        arrForSearch.splice(index, 1);
+                        console.log(arrForSearch);
+                    }
                 });
             });
 
