@@ -52,20 +52,20 @@ export default class FormDirector {
   buildCreateVisitForm() {
     this.#builder.addSelect(["create-visit__doctor"], true, [
       { value: "", textContent: "Choose a doctor" },
-      { value: "cardiologist", textContent: "Cardiologist" },
-      { value: "dentist", textContent: "Dentist" },
-      { value: "therapist", textContent: "Therapist" },
+      { value: "Cardiologist", textContent: "Cardiologist" },
+      { value: "Dentist", textContent: "Dentist" },
+      { value: "Therapist", textContent: "Therapist" },
     ]);
     this.#builder.addSelect(["create-visit__priority"], true, [
       { value: "", textContent: "Choose a priority" },
-      { value: "high", textContent: "High" },
-      { value: "normal", textContent: "Normal" },
-      { value: "low", textContent: "Low" },
+      { value: "High", textContent: "High" },
+      { value: "Normal", textContent: "Normal" },
+      { value: "Low", textContent: "Low" },
     ]);
 
     this.#builder.addSelect(["create-visit__status"], true, [
-      { value: "open", textContent: "Open" },
-      { value: "done", textContent: "Done" },
+      { value: "Open", textContent: "Open" },
+      { value: "Done", textContent: "Done" },
     ]);
 
     this.#builder.addInput(

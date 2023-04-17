@@ -13,19 +13,19 @@ export function removeElementCollection(className) {
 export function changeDoctorFields(formWindow, form, select) {
   select.addEventListener("change", () => {
     switch (event.target.value) {
-      case "cardiologist":
+      case "Cardiologist":
         {
           removeElementCollection(".additional-fields");
           formWindow.lastChild.append(...form.addCardiologistFields());
         }
         break;
-      case "dentist":
+      case "Dentist":
         {
           removeElementCollection(".additional-fields");
           formWindow.lastChild.append(form.addDentistFields());
         }
         break;
-      case "therapist":
+      case "Therapist":
         {
           removeElementCollection(".additional-fields");
           formWindow.lastChild.append(form.addTherapistFields());

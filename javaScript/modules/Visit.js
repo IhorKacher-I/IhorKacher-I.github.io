@@ -1,7 +1,7 @@
 import Request from "./Request.js";
-
 import { Modal } from "./Modal.js";
 import { root } from "../constants/const.js";
+
 export class Visit {
   constructor({
     doctorName,
@@ -40,9 +40,7 @@ export class Visit {
     card.id = `${this.id}`;
     card.dataset.priority = `${this.priority}`;
     card.dataset.status = `${this.status}`;
-    card.innerHTML = `
-
-			 <div class="card__info">
+    card.innerHTML = `<div class="card__info">
 				<h4 class="card__name">
 					${this.patientName}
 				</h4>
@@ -73,7 +71,7 @@ export class Visit {
 			</button>
 		</div>`;
 
-    const BtnDelet = card.querySelector(".button__trash");
+    const BtnDelet = card.querySelector(".button__trash"); //кнопка з карток
     BtnDelet.addEventListener("click", (event) => {
       event.target.closest("button__trash");
       const request = new Request();
@@ -97,7 +95,7 @@ export class Visit {
       ).render();
       root.append(fullInfoWindow);
 
-      const deleteBtn = document.querySelector(".buttons__delete-button");
+      const deleteBtn = document.querySelector(".buttons__delete-button"); // кнопка з модалки
       deleteBtn.addEventListener("click", (event) => {
         new Request().delete(this.id).then((data) => {
           card.closest(`[id="${this.id}"]`).remove();
@@ -115,3 +113,71 @@ export class Visit {
     return card;
   }
 }
+
+// export class VisitDentist extends Visit {
+//   constructor(
+//     doctorName,
+//     priority,
+//     purposeVisit,
+//     description,
+//     patientName,
+//     lastVisit
+//   ) {
+//     super(doctorName, priority, purposeVisit, description, patientName);
+//     this.lastVisit = lastVisit;
+//   }
+// }
+// data.forEach((d) => {
+//   const { doctorName, priority, purposeVisit, description, patientName } = d;
+
+//   const newCardList = new Visit(d);
+
+//   //   if (this.doctorName === "Стоматолог") {
+//   //     new VisitDentist(d);
+//   //   }
+//   //   if (this.doctorName === "Терапевт") {
+//   //     new VisitTherapist(d);
+//   //   } else if (this.doctorName === "Кардіолог") {
+//   //     new VisitCardiologist(d);
+//   //   }
+//   const sectionCards = document.querySelector(".cards-list");
+//   sectionCards.prepend(newCardList.renderShortCard());
+// });
+
+// export class VisitTherapist extends Visit {
+//   constructor(
+//     doctorName,
+//     priority,
+//     purposeVisit,
+//     description,
+//     patientName,
+//     age
+//   ) {
+//     super(doctorName, priority, purposeVisit, description, patientName);
+//     this.age = age;
+//   }
+// }
+// export class VisitCardiologist extends Visit {
+//   constructor(
+//     doctorName,
+//     priority,
+//     purposeVisit,
+//     description,
+//     patientName,
+//     age,
+//     normalPressure,
+//     bodyMassIndex,
+//     diseases
+//   ) {
+//     super(doctorName, priority, purposeVisit, description, patientName);
+//     this.age = age;
+//     this.normalPressure = normalPressure;
+//     this.bodyMassIndex = bodyMassIndex;
+//     this.diseases = diseases;
+//   }
+// }
+
+// const visitDentist = new VisitDentist();
+
+// const visitTherapist = new VisitTherapist();
+// const visitCardiologist = new VisitCardiologist();

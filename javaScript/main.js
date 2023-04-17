@@ -29,12 +29,24 @@ window.addEventListener("load", () => {
     // ПИСАТИ ВСЕ ТУТ НИЖЧЕ!!!!!!!
 
     const request = new Request().get("");
-    request.then((data) => {
-      const liArray = data.map((obj) => {
-        return new Visit(obj).renderShortCard();
+    request
+      .then((data) => {
+        const liArray = data.map((obj) => {
+          //  if (obj.doctorName === "Cardiologist") {
+          //    return new VisitCardiologist(obj).renderShortCard();
+          //  } else if (obj.doctorName === "Therapist") {
+          //    return new VisitTherapist(obj).renderShortCard();
+          //  } else if (obj.doctorName === "Dentist") {
+          //    return new VisitDentist(obj).renderShortCard();
+          //  }
+
+          return new Visit(obj).renderShortCard();
+        });
+        document.querySelector(".cards-list").append(...liArray);
+      })
+      .catch((error) => {
+        console.error(`Error: ${error.message}`);
       });
-      document.querySelector(".cards-list").append(...liArray);
-    });
   } else {
     window.location.href = "login.html";
   }

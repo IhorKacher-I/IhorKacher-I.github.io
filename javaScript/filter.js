@@ -49,7 +49,7 @@ filterBtn.addEventListener("click", (event) => {
   event.preventDefault();
 });
 
-// // section - filter
+// section - filter
 // property filter
 // let filterTabWrap = document.querySelector(".select__list--urgency");
 
@@ -130,66 +130,108 @@ filterBtn.addEventListener("click", (event) => {
 //   }
 // }
 
-// const searchInput = document.querySelector(".filter__search");
 // const searchButton = document.querySelector(".filter__button");
-// const cards = document.querySelectorAll(".card"); // вибираємо всі елементи з класом "card"
 
 // searchButton.addEventListener("click", function () {
+//   const searchInput = document.querySelector(".filter__search");
 //   const searchTerm = searchInput.value.toLowerCase(); // отримуємо введений текст та перетворюємо його в нижній регістр
+//   const cards = document.querySelectorAll(".card"); // вибираємо всі елементи з класом "card"
 //   cards.forEach(function (card) {
-//     const title = card.querySelector("h4").innerText.toLowerCase(); // отримуємо текст заголовку карти та перетворюємо його в нижній регістр
+//     const title = document
+//       .querySelectorAll(".card__name")
+//       .innerText.toLowerCase(); // отримуємо текст заголовку карти та перетворюємо його в нижній регістр
 //     const description = card.querySelector("p").innerText.toLowerCase(); // отримуємо текст опису карти та перетворюємо його в нижній регістр
 //     if (title.includes(searchTerm) || description.includes(searchTerm)) {
-//       card.style.display = ""; // якщо заголовок або опис містять введений текст, показуємо карту
+//       card.classList.add("hide"); // якщо заголовок або опис містять введений текст, показуємо карту
 //     } else {
-//       card.style.display = "none"; // якщо заголовок та опис не містять введений текст, приховуємо карту
+//       card.classList.remove("hide"); // якщо заголовок та опис не містять введений текст, приховуємо карту
 //     }
 //   });
 // });
-let filterTabWrap = document.querySelector(".select__list--urgency");
-let statusFilterTabWrap = document.querySelector(".select__list--status");
 
-function filter(event) {
-  let filterTab = document.querySelectorAll(".select__item--urgency");
-  let statusFilterTab = document.querySelectorAll(".select__item--status");
+// let cards = document.querySelectorAll(".card");
 
-  const priority = event.target.dataset.priority;
-  const status = event.target.dataset.status;
+// function liveSearch() {
+//   let search_query = document.querySelector(".filter__search").value;
 
-  if (priority) {
-    filterTab.forEach((title) => {
-      title.classList.remove("active");
-    });
-    event.target.classList.add("active");
-  } else if (status) {
-    statusFilterTab.forEach((title) => {
-      title.classList.remove("active");
-    });
-    event.target.classList.add("active");
-  }
+//   //Use innerText if all contents are visible
+//   //Use textContent for including hidden elements
+//   for (var i = 0; i < cards.length; i++) {
+//     if (
+//       cards[i].textContent.toLowerCase().includes(search_query.toLowerCase())
+//     ) {
+//       cards[i].classList.remove("hide");
+//     } else {
+//       cards[i].classList.add("hide");
+//     }
+//   }
+// }
 
-  filterByData(priority, status);
-}
+// //Search button click
+// const searchButton = document.querySelector(".filter__button");
+// searchButton.addEventListener("click", () => {
+//   //initializations
+//   let searchInput = document.querySelector(".filter__search").value;
+//   let cards = document.querySelectorAll(".card"); // всі картки
+//   let elements = document.querySelectorAll(".card__name"); //по чому шукають
 
-filterTabWrap.addEventListener("click", filter);
-statusFilterTabWrap.addEventListener("click", filter);
+//   //loop through all elements
+//   elements.forEach((element, index) => {
+//     //check if text includes the search value
+//     if (element.innerText.includes(searchInput)) {
+//       //display matching card
+//       cards[index].classList.remove("hide");
+//     } else {
+//       //hide others
+//       cards[index].classList.add("hide");
+//     }
+//   });
+// });
 
-function filterByData(priority, status) {
-  let galleryItems = document.querySelectorAll(".card");
+// let filterTabWrap = document.querySelector(".select__list--urgency");
+// let statusFilterTabWrap = document.querySelector(".select__list--status");
 
-  if (!priority && !status) {
-    galleryItems.forEach((item) => {
-      item.classList.remove("hide");
-    });
-  } else {
-    galleryItems.forEach((item) => {
-      item.classList.add("hide");
-      if (
-        (priority && item.dataset.priority === priority) ||
-        (status && item.dataset.status === status)
-      ) {
-        item.classList.remove("hide");
-      }
-    });
-  }
-}
+// function filter(event) {
+//   let filterTab = document.querySelectorAll(".select__item--urgency");
+//   let statusFilterTab = document.querySelectorAll(".select__item--status");
+
+//   const priority = event.target.dataset.priority;
+//   const status = event.target.dataset.status;
+
+//   if (priority) {
+//     filterTab.forEach((title) => {
+//       title.classList.remove("active");
+//     });
+//     event.target.classList.add("active");
+//   } else if (status) {
+//     statusFilterTab.forEach((title) => {
+//       title.classList.remove("active");
+//     });
+//     event.target.classList.add("active");
+//   }
+
+//   filterByData(priority, status);
+// }
+
+// filterTabWrap.addEventListener("click", filter);
+// statusFilterTabWrap.addEventListener("click", filter);
+
+// function filterByData(priority, status) {
+//   let galleryItems = document.querySelectorAll(".card");
+
+//   if (!priority && !status) {
+//     galleryItems.forEach((item) => {
+//       item.classList.remove("hide");
+//     });
+//   } else {
+//     galleryItems.forEach((item) => {
+//       item.classList.add("hide");
+//       if (
+//         (priority && item.dataset.priority === priority) ||
+//         (status && item.dataset.status === status)
+//       ) {
+//         item.classList.remove("hide");
+//       }
+//     });
+//   }
+// }

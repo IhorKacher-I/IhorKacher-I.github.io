@@ -53,6 +53,7 @@ export default class Request {
       const response = await fetch(`${this.url}/${entity}`, {
         method: "GET",
         headers: this.#getHeaders(),
+        //   body: JSON.stringify(dataObj),
       });
       return await response.json();
     } catch (error) {
