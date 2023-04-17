@@ -1,22 +1,19 @@
-import Request from "./Request.js";
-import {Modal} from "./Modal.js";
-import {root} from "../constants/const.js";
-export class Visit {
-    constructor({
-                    doctorName,
-                    priority,
-                    status,
-                    purposeVisit,
-                    description,
-                    patientName,
-                    id,
+import Request from "../Request.js";
+import {Modal} from "../Modal.js";
+import {root, body} from "../../constants/const.js";
 
-                    lastVisit,
-                    age,
-                    diseases,
-                    bodyMassIndex,
-                    normalPressure,
-                }) {
+export class Visit {
+    constructor(
+        {
+            doctorName,
+            priority,
+            status,
+            purposeVisit,
+            description,
+            patientName,
+            id,
+        }
+    ) {
         this.doctorName = doctorName;
         this.priority = priority;
         this.status = status;
@@ -24,13 +21,9 @@ export class Visit {
         this.description = description;
         this.patientName = patientName;
         this.id = id;
-
-        age !== undefined ? this.age = age : null;
-        lastVisit !== undefined ? this.lastVisit = lastVisit : null;
-        diseases !== undefined ? this.diseases = diseases : null;
-        bodyMassIndex !== undefined ? this.bodyMassIndex = bodyMassIndex : null;
-        normalPressure !== undefined ? this.normalPressure = normalPressure : null;
+        this.status = "Open";
     }
+
     renderShortCard() {
         const card = document.createElement("li");
         card.classList.add("card");
@@ -77,7 +70,7 @@ export class Visit {
             request.delete(this.id);
 
             const cards = document.querySelectorAll(".card");
-            if(cards.length === 0) {
+            if (cards.length === 0) {
                 root.insertAdjacentHTML("afterbegin", `
                     <div class="container" id="no-items">
                     <h3 class="no-items" id="noItems">No items have been added</h3>
@@ -109,12 +102,11 @@ export class Visit {
             });
 
             const editBtn = document.querySelector('.buttons__edit-button');
-                editBtn.addEventListener('click', (event) => {
-                    console.log('edit visit form')
+            editBtn.addEventListener('click', (event) => {
+                console.log('edit visit form')
 
-                });
+            });
         });
-        //  console.log(this.renderFullInfo);
 
         return card;
     }
