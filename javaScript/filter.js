@@ -1,3 +1,5 @@
+// import Request from "./Request.js";
+
 // Custom element-----------------
 const btnSelectStatus = document.querySelector(".filter__select--status");
 const btnSelectUrgency = document.querySelector(".filter__select--urgency");
@@ -51,84 +53,84 @@ filterBtn.addEventListener("click", (event) => {
 
 // section - filter
 // property filter
+let filterTabWrap = document.querySelector(".select__list--urgency");
+
+function filter(event) {
+  let filterTab = document.querySelectorAll(".select__item--urgency");
+
+  const fil = event.target.dataset.priority;
+
+  if (fil) {
+    filterTab.forEach((title) => {
+      title.classList.remove("active");
+    });
+
+    event.target.classList.add("active");
+  }
+  filderByData(event.target.dataset.priority);
+}
+filterTabWrap.addEventListener("click", filter);
+
+function filderByData(data) {
+  let galleryItems = document.querySelectorAll(".card");
+
+  const fil = data;
+
+  if (fil === "All") {
+    galleryItems.forEach((item) => {
+      item.classList.remove("hide");
+    });
+  } else {
+    galleryItems.forEach((item) => {
+      item.classList.add("hide");
+      if (item.dataset.priority === fil) {
+        item.classList.remove("hide");
+      }
+    });
+  }
+}
+//  status filter
 // let filterTabWrap = document.querySelector(".select__list--urgency");
+let filterTabWrap2 = document.querySelector(".select__list--status");
 
-// function filter(event) {
-//   let filterTab = document.querySelectorAll(".select__item--urgency");
-
-//   const fil = event.target.dataset.priority;
-
-//   if (fil) {
-//     filterTab.forEach((title) => {
-//       title.classList.remove("active");
-//     });
-
-//     event.target.classList.add("active");
-//   }
-//   filderByData(event.target.dataset.priority);
-// }
+function filter2(event) {
+  //   let filterTab = document.querySelectorAll(".select__item--urgency");
+  let filterTab2 = document.querySelectorAll(".select__item--status");
+  //   const fil = event.target.dataset.priority;
+  const fil2 = event.target.dataset.status;
+  if (fil2) {
+    //  filterTab.forEach((title) => {
+    //    title.classList.remove("active");
+    //  });
+    filterTab2.forEach((title) => {
+      title.classList.remove("active");
+    });
+    event.target.classList.add("active");
+  }
+  //   filderByData(event.target.dataset.priority);
+  filderByData2(event.target.dataset.status);
+}
 // filterTabWrap.addEventListener("click", filter);
+filterTabWrap2.addEventListener("click", filter2);
 
-// function filderByData(data) {
-//   let galleryItems = document.querySelectorAll(".card");
+function filderByData2(data) {
+  let galleryItems = document.querySelectorAll(".card");
 
-//   const fil = data;
+  const fil = data;
 
-//   if (fil === "All") {
-//     galleryItems.forEach((item) => {
-//       item.classList.remove("hide");
-//     });
-//   } else {
-//     galleryItems.forEach((item) => {
-//       item.classList.add("hide");
-//       if (item.dataset.priority === fil) {
-//         item.classList.remove("hide");
-//       }
-//     });
-//   }
-// }
-// //  status filter
-// // let filterTabWrap = document.querySelector(".select__list--urgency");
-// let filterTabWrap2 = document.querySelector(".select__list--status");
-
-// function filter2(event) {
-//   //   let filterTab = document.querySelectorAll(".select__item--urgency");
-//   let filterTab2 = document.querySelectorAll(".select__item--status");
-//   //   const fil = event.target.dataset.priority;
-//   const fil2 = event.target.dataset.status;
-//   if (fil2) {
-//     //  filterTab.forEach((title) => {
-//     //    title.classList.remove("active");
-//     //  });
-//     filterTab2.forEach((title) => {
-//       title.classList.remove("active");
-//     });
-//     event.target.classList.add("active");
-//   }
-//   //   filderByData(event.target.dataset.priority);
-//   filderByData2(event.target.dataset.status);
-// }
-// // filterTabWrap.addEventListener("click", filter);
-// filterTabWrap2.addEventListener("click", filter2);
-
-// function filderByData2(data) {
-//   let galleryItems = document.querySelectorAll(".card");
-
-//   const fil = data;
-
-//   if (fil === "All") {
-//     galleryItems.forEach((item) => {
-//       item.classList.remove("hide");
-//     });
-//   } else {
-//     galleryItems.forEach((item) => {
-//       item.classList.add("hide");
-//       if (item.dataset.status === fil) {
-//         item.classList.remove("hide");
-//       }
-//     });
-//   }
-// }
+  if (fil === "All") {
+    galleryItems.forEach((item) => {
+      item.classList.remove("hide");
+    });
+  } else {
+    galleryItems.forEach((item) => {
+      item.classList.add("hide");
+      if (item.dataset.status === fil) {
+        item.classList.remove("hide");
+      }
+    });
+  }
+}
 
 // const searchButton = document.querySelector(".filter__button");
 
@@ -235,3 +237,42 @@ filterBtn.addEventListener("click", (event) => {
 //     });
 //   }
 // }
+// в одну функцію превірку по фільтрам
+
+// перебрати масив об'єктів
+const searchButton = document.querySelector(".filter__button");
+searchButton.addEventListener("click", filter);
+function filter() {
+  // отримати масив об'єктів
+  //   let dataArr;
+  //   const request = new Request().get("");
+  //   request.then((data) => {
+  //     dataArr = data;
+  //   });
+  //   console.log(dataArr);
+
+  //
+  let searchInput = document
+    .querySelector(".filter__search")
+    .value.toLowerCase();
+  let cardsList = document.querySelector(".cards-list").children;
+  let item = document.querySelectorAll(".card__name");
+  let cards = document.querySelectorAll(".card");
+  //   let galleryItems = document.querySelectorAll(".card");
+  console.log(item);
+  console.log(searchInput);
+  item.forEach((card) => {
+    if (searchInput === card.innerText.toLowerCase()) {
+      console.log("work");
+      // виводжу або приховую картки
+      cards.forEach((item) => {
+        item.classList.add("hide");
+      });
+    }
+    //  cards.filter();
+    //  card.item;
+    //  console.log(card.innerText.toLowerCase());
+  });
+  //   console.log(cardsList);
+}
+filter();
