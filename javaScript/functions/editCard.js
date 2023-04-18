@@ -2,7 +2,8 @@ import FormBuilder from "../modules/form/FormBuilder.js";
 import FormDirector from "../modules/form/FormDirector.js";
 import {Modal} from "../modules/Modal.js";
 import Request from "../modules/Request.js";
-import {arrForSearch, body, root} from "../constants/const.js";
+import {arrForSearch, root} from "../constants/const.js";
+import {removeModal} from "./removeModal.js";
 
 export function editCard(fullInfoWindow) {
     if(fullInfoWindow.tagName) fullInfoWindow.remove();
@@ -54,8 +55,7 @@ export function editCard(fullInfoWindow) {
             let index = arrForSearch.findIndex(el => el.id === this.id);
             arrForSearch.splice(index, 1, data);
 
-            document.querySelector('#modal').remove();
-            body.style["overflow-y"] = "";
+            removeModal();
         })
             .catch((e) => alert(e.message));
     })

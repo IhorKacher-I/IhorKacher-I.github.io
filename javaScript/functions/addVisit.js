@@ -1,6 +1,6 @@
 import Request from "../modules/Request.js";
 import {Modal} from "../modules/Modal.js";
-import { root, body, arrForSearch} from "../constants/const.js";
+import { root, arrForSearch} from "../constants/const.js";
 import FormBuilder from "../modules/form/FormBuilder.js";
 import FormDirector from "../modules/form/FormDirector.js";
 import {VisitDentist} from "../modules/visit/VisitDentist.js";
@@ -8,6 +8,7 @@ import {VisitCardiologist} from "../modules/visit/VisitCardiologist.js";
 import {VisitTherapist} from "../modules/visit/VisitTherapist.js";
 import {createVisitObj} from "./createVisitObj.js";
 import {changeDoctorFields} from "./changeDoctorFields.js";
+import {removeModal} from "./removeModal.js";
 
 function handleFormSubmit(event) {
     event.preventDefault();
@@ -28,8 +29,7 @@ function handleFormSubmit(event) {
             default:
                 visitCard = new VisitTherapist(obj).renderShortCard();
         }
-        document.querySelector('#modal').remove();
-        body.style["overflow-y"] = "";
+        removeModal();
 
         const sectionCards = document.querySelector(".cards-list");
         sectionCards.prepend(visitCard);

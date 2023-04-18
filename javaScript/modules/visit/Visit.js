@@ -1,10 +1,10 @@
-import Request from "../Request.js";
 import {Modal} from "../Modal.js";
-import {root, body, arrForSearch} from "../../constants/const.js";
+import {root} from "../../constants/const.js";
 import {editCard} from "../../functions/editCard.js";
+import {deleteVisitCard} from "../../functions/deleteVisitCard.js";
+
 export class Visit {
     constructor(
-
         {
             doctorName,
             priority,
@@ -14,7 +14,6 @@ export class Visit {
             patientName,
             id,
         }
-
     ) {
         this.doctorName = doctorName;
         this.priority = priority;
@@ -63,29 +62,10 @@ export class Visit {
 
         const BtnDelete = card.querySelector(".button__trash");
         BtnDelete.addEventListener("click", (event) => {
-            const request = new Request();
-            request.delete(this.id).then(data => {
-                if( data.status === 200) {
-                    card.closest(`[id="${this.id}"]`).remove();
-
-
-                    let index = arrForSearch.findIndex(el => el.id === this.id);
-                    arrForSearch.splice(index, 1);
-                }
-            })
-                .catch((e) => alert(e.message))
-                .finally(()=> {
-                const cards = document.querySelectorAll(".card");
-                if (cards.length === 0) {
-                    root.insertAdjacentHTML("beforeend", `
-                    <div class="container" id="no-items">
-                    <h3 class="no-items" id="noItems">No items have been added</h3>
-                    </div>`);
-                }
-            });
+            deleteVisitCard(this.id);
         });
 
-            let shortCardEditBtn = card.querySelector('.button__edit');
+        const shortCardEditBtn = card.querySelector('.button__edit');
         shortCardEditBtn.addEventListener('click', editCard.bind(this));
 
         const btnMore = card.querySelector(".card__more");
@@ -95,28 +75,7 @@ export class Visit {
 
             const deleteBtn = document.querySelector('.buttons__delete-button');
             deleteBtn.addEventListener('click', (event) => {
-
-                const request = new Request();
-                request.delete(this.id).then(data => {
-                    if( data.status === 200) {
-                        document.querySelector('#modal').remove();
-                        body.style["overflow-y"] = "";
-                        card.closest(`[id="${this.id}"]`).remove();
-
-                        let index = arrForSearch.findIndex(el => el.id === this.id);
-                        arrForSearch.splice(index, 1);
-                    }
-                })
-                    .catch((e) => alert(e.message))
-                    .finally(()=> {
-                    const cards = document.querySelectorAll(".card");
-                    if (cards.length === 0) {
-                        root.insertAdjacentHTML("beforeend", `
-                    <div class="container" id="no-items">
-                    <h3 class="no-items" id="noItems">No items have been added</h3>
-                    </div>`);
-                    }
-                });
+                deleteVisitCard(this.id, true);
             });
 
             const editBtn = document.querySelector('.buttons__edit-button');
