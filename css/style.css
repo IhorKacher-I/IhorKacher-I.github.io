@@ -477,11 +477,20 @@
         gap: 25px;
     }
 
+@media (max-width: 690px) {
+}
+
 .full-visit-information__body div {
     display: flex;
-    /*justify-content: space-evenly;*/
-    /*flex-direction: column;*/
     gap: 25px;
+}
+
+@media (max-width: 500px) {
+    .full-visit-information__body div:not(:last-child) {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
 }
 
     .doctor__label,
@@ -512,8 +521,7 @@
     .pressure__value,
     .patient-last-visit__value {
         display: block;
-        /*left: 25%;*/
-
+        padding-left: 7px;
         color: #3b3f61;
         font-weight: 400;
         font-size: 16px;
