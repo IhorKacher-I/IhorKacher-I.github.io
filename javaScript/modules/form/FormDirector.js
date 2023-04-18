@@ -13,7 +13,6 @@ export default class FormDirector {
     setBuilder(builder) {
         this.#builder = builder;
     }
-
     buildFilterForm() {
         function submitHandler(e) {
             e.preventDefault();
