@@ -120,13 +120,15 @@
   margin: 0;
   color: #3b3f61;
   font-size: 36px;
-  line-height: 20px;
+  line-height: 36px;
   font-weight: 500;
+    padding: 10px;
 }
 
 @media (max-width: 690px) {
     .header__title {
         font-size: 30px;
+        line-height: 30px;
     }
 }
 
@@ -475,6 +477,13 @@
         gap: 25px;
     }
 
+.full-visit-information__body div {
+    display: flex;
+    /*justify-content: space-evenly;*/
+    /*flex-direction: column;*/
+    gap: 25px;
+}
+
     .doctor__label,
     .priority__label,
     .patient-name__label,
@@ -489,6 +498,7 @@
         font-weight: 500;
         font-size: 16px;
         line-height: 20px;
+        width: 150px;
     }
 
     .doctor__name,
@@ -501,8 +511,8 @@
     .patient-diseases__value,
     .pressure__value,
     .patient-last-visit__value {
-        position: absolute;
-        left: 25%;
+        display: block;
+        /*left: 25%;*/
 
         color: #3b3f61;
         font-weight: 400;
