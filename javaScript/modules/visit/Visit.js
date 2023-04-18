@@ -60,8 +60,8 @@ export class Visit {
 			</button>
 		</div>`;
 
-    const BtnDelet = card.querySelector(".button__trash");
-    BtnDelet.addEventListener("click", (event) => {
+    const BtnDelete = card.querySelector(".button__trash");
+    BtnDelete.addEventListener("click", (event) => {
       event.target.closest("button__trash");
       const request = new Request();
       card.closest(`[id="${this.id}"]`).remove();
