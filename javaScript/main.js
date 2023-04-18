@@ -3,7 +3,7 @@ import getTokenFromCookie from "./functions/getTokenFromCookie.js";
 import User from "./modules/User.js";
 import Request from "./modules/Request.js";
 import {root,  arrForSearch} from "./constants/const.js";
-import {addVisit} from "./functions/functions.js";
+import {addVisit} from "./functions/addVisit.js";
 import {VisitDentist} from "./modules/visit/VisitDentist.js";
 import {VisitCardiologist} from "./modules/visit/VisitCardiologist.js";
 import {VisitTherapist} from "./modules/visit/VisitTherapist.js";
@@ -22,10 +22,6 @@ window.addEventListener("load", () => {
 
     if (isLogin()) {
         getTokenFromCookie();
-        // ПИСАТИ ВСЕ ТУТ НИЖЧЕ!!!!!!!
-        // 164587
-// new Request().delete("164599");
-
 
        const filterForm = createFilterForm(["filter__header"],  "search-form");
         document.querySelector(".filter__container").append(filterForm);
@@ -48,12 +44,11 @@ window.addEventListener("load", () => {
                     case "Cardiologist":
                         return new VisitCardiologist(obj).renderShortCard();
                     default:
-
                         return new VisitTherapist(obj).renderShortCard();
                 }
             });
             document.querySelector(".cards-list").append(...liArray);
-        });
+        }).catch((e) => alert(e.message));
 
     } else {
     window.location.href = "login.html";

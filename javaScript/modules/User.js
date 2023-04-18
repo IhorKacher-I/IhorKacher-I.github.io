@@ -5,7 +5,8 @@ import {COOKIE_TOKEN_NAME} from "../constants/const.js";
 export default class User {
     static async logIn(dataObj) {
         const request = new Request();
-        const token = await request.post("login", dataObj, false);
+        const token = await request.post("login", dataObj, false)
+            .catch((e) => alert(e.message));
         request.token = token;
         Cookie.set("token", token);
         if (token) return true;

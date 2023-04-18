@@ -4,8 +4,9 @@ import {Modal} from "../modules/Modal.js";
 import Request from "../modules/Request.js";
 import {arrForSearch, body, root} from "../constants/const.js";
 
-export function editCard() {
-    const formBuilder = new FormBuilder(["edit-visit__form"], "edit-visit-form");
+export function editCard(fullInfoWindow) {
+    if(fullInfoWindow.tagName) fullInfoWindow.remove();
+    const formBuilder = new FormBuilder(["visit__form"], "visit-form");
     const formDirector = new FormDirector();
     formDirector.setBuilder(formBuilder);
 
@@ -40,11 +41,11 @@ export function editCard() {
             this.patientName = patientName;
             this.status = status;
 
-            if (age) this.age = age;
-            if (lastVisit) this.lastVisit = lastVisit;
-            if (normalPressure) this.normalPressure = normalPressure;
-            if (bodyMassIndex) this.bodyMassIndex = bodyMassIndex;
-            if (diseases) this.diseases = diseases;
+            if (age || age === "") this.age = age === "" ? "-" : age;
+            if (lastVisit || lastVisit === "") this.lastVisit = lastVisit === "" ? "-" : lastVisit;
+            if (normalPressure || normalPressure === "") this.normalPressure = normalPressure === "" ? "-" : normalPressure;
+            if (bodyMassIndex || bodyMassIndex === "") this.bodyMassIndex = bodyMassIndex === "" ? "-" : bodyMassIndex;
+            if (diseases || diseases === "") this.diseases = diseases === "" ? "-" : diseases;
 
             const parentElement = document.getElementById(this.id);
             const shortCard = parentElement.querySelector('.card__info .card__name');
@@ -55,7 +56,8 @@ export function editCard() {
 
             document.querySelector('#modal').remove();
             body.style["overflow-y"] = "";
-        });
+        })
+            .catch((e) => alert(e.message));
     })
     root.append(editVisitWindow);
 }

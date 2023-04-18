@@ -72,7 +72,9 @@ export class Visit {
                     let index = arrForSearch.findIndex(el => el.id === this.id);
                     arrForSearch.splice(index, 1);
                 }
-            }).finally(()=> {
+            })
+                .catch((e) => alert(e.message))
+                .finally(()=> {
                 const cards = document.querySelectorAll(".card");
                 if (cards.length === 0) {
                     root.insertAdjacentHTML("beforeend", `
@@ -83,9 +85,8 @@ export class Visit {
             });
         });
 
-        let shortCardEditBtn = card.querySelector('.button__edit');
+            let shortCardEditBtn = card.querySelector('.button__edit');
         shortCardEditBtn.addEventListener('click', editCard.bind(this));
-
 
         const btnMore = card.querySelector(".card__more");
         btnMore.addEventListener("click", () => {
@@ -105,7 +106,9 @@ export class Visit {
                         let index = arrForSearch.findIndex(el => el.id === this.id);
                         arrForSearch.splice(index, 1);
                     }
-                }).finally(()=> {
+                })
+                    .catch((e) => alert(e.message))
+                    .finally(()=> {
                     const cards = document.querySelectorAll(".card");
                     if (cards.length === 0) {
                         root.insertAdjacentHTML("beforeend", `
@@ -117,9 +120,7 @@ export class Visit {
             });
 
             const editBtn = document.querySelector('.buttons__edit-button');
-            editBtn.addEventListener('click', editCard.bind(this));
-
-
+            editBtn.addEventListener('click', editCard.bind(this, fullInfoWindow));
         });
 
         return card;

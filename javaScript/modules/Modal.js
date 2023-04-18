@@ -28,7 +28,6 @@ export class Modal {
             body.style["overflow-y"] = "";
         });
 
-        //form має бути розміткою уже того типу який нам потрібен
         if (this.form instanceof HTMLFormElement) {
             windowHeader.after(this.form)
         } else {
