@@ -1,9 +1,10 @@
 import Request from "../Request.js";
 import {Modal} from "../Modal.js";
 import {root, body, arrForSearch} from "../../constants/const.js";
-
+import {editCard} from "../../functions/editCard.js";
 export class Visit {
     constructor(
+
         {
             doctorName,
             priority,
@@ -13,15 +14,15 @@ export class Visit {
             patientName,
             id,
         }
+
     ) {
         this.doctorName = doctorName;
         this.priority = priority;
-        this.status = status;
+        this.status = status ? status : "Open";
         this.purposeVisit = purposeVisit;
         this.description = description;
         this.patientName = patientName;
         this.id = id;
-        this.status = "Open";
     }
 
     renderShortCard() {
@@ -67,6 +68,7 @@ export class Visit {
                 if( data.status === 200) {
                     card.closest(`[id="${this.id}"]`).remove();
 
+
                     let index = arrForSearch.findIndex(el => el.id === this.id);
                     arrForSearch.splice(index, 1);
                 }
@@ -80,6 +82,10 @@ export class Visit {
                 }
             });
         });
+
+        let shortCardEditBtn = card.querySelector('.button__edit');
+        shortCardEditBtn.addEventListener('click', editCard.bind(this));
+
 
         const btnMore = card.querySelector(".card__more");
         btnMore.addEventListener("click", () => {
@@ -111,12 +117,13 @@ export class Visit {
             });
 
             const editBtn = document.querySelector('.buttons__edit-button');
-            editBtn.addEventListener('click', (event) => {
-                console.log('edit visit form')
+            editBtn.addEventListener('click', editCard.bind(this));
 
-            });
+
         });
 
         return card;
     }
+
+
 }

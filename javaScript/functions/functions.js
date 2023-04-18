@@ -25,13 +25,13 @@ export function changeDoctorFields(modalWindow, form, select) {
       case "Dentist":
         {
           removeElementCollection(".additional-fields");
-          formWindow.lastChild.append(form.addDentistFields());
+          formWindow.lastChild.append(...form.addDentistFields());
         }
         break;
       case "Therapist":
         {
           removeElementCollection(".additional-fields");
-          formWindow.lastChild.append(form.addTherapistFields());
+          formWindow.lastChild.append(...form.addTherapistFields());
         }
         break;
       default:

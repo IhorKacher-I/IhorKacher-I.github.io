@@ -8,7 +8,6 @@ import {VisitDentist} from "./modules/visit/VisitDentist.js";
 import {VisitCardiologist} from "./modules/visit/VisitCardiologist.js";
 import {VisitTherapist} from "./modules/visit/VisitTherapist.js";
 import {createFilterForm} from "./functions/createFilterForm.js";
-
 window.addEventListener("load", () => {
   const logOutBtn = document.querySelector("#logout-btn");
   logOutBtn.addEventListener("click", () => {
@@ -24,6 +23,9 @@ window.addEventListener("load", () => {
     if (isLogin()) {
         getTokenFromCookie();
         // ПИСАТИ ВСЕ ТУТ НИЖЧЕ!!!!!!!
+        // 164587
+// new Request().delete("164599");
+
 
        const filterForm = createFilterForm(["filter__header"],  "search-form");
         document.querySelector(".filter__container").append(filterForm);
@@ -46,6 +48,7 @@ window.addEventListener("load", () => {
                     case "Cardiologist":
                         return new VisitCardiologist(obj).renderShortCard();
                     default:
+
                         return new VisitTherapist(obj).renderShortCard();
                 }
             });

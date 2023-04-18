@@ -9,11 +9,13 @@ export class VisitDentist extends Visit {
             purposeVisit,
             description,
             patientName,
-            lastVisit
+            lastVisit,
+            status
         }
     ) {
-        super({doctorName, priority, purposeVisit, description, patientName, id});
+        super({doctorName, priority, purposeVisit, description, patientName, id, status});
         this.lastVisit = (lastVisit.trim() !== "") ? lastVisit : "-";
 
     }
+
 }

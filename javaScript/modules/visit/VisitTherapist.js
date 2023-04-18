@@ -9,10 +9,11 @@ export class VisitTherapist extends Visit {
             purposeVisit,
             description,
             patientName,
-            age
+            age,
+            status
         }
     ) {
-        super({doctorName, priority, purposeVisit, description, patientName,id});
+        super({doctorName, priority, purposeVisit, description, patientName,id, status});
         this.age = (age.trim() !== "") ? age : "-";
     }
 }

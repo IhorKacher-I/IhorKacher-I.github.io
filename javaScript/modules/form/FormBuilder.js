@@ -33,28 +33,38 @@ export default class FormBuilder {
         this.#form.append(label);
     }
 
-    addInput(classList = [], id = "", type = "", name = "", required = false, placeholder = '', autocomplete= "on" ) {
-        const input = createHTMLElement("input", classList, {id, type, name, required, placeholder, autocomplete});
+    addInput(classList = [], id = "", type = "", name = "", required = false, placeholder = '', autocomplete= "on", value = "") {
+        const input = createHTMLElement("input", classList, {id, type, name, required, placeholder, autocomplete, value});
         this.#form.append(input);
     }
     addButton(classList = [], id = "", type = "", innerHTML = "") {
         const button = createHTMLElement("button", classList, {id, type, innerHTML});
         this.#form.append(button);
     }
-    addSelect(classList = [], required = false, options = [],) {
-        const select = createHTMLElement("select", classList, { name, required});
+    addSelect(classList = [], required = false, options = [], selectedValue = "", name = "") {
+        const select = createHTMLElement("select", classList, { name, required });
+        const selectedOption = createHTMLElement("option", [], { value: selectedValue, textContent: selectedValue, selected: true });
+        select.append(selectedOption);
         for (const option of options) {
             const { value, textContent } = option;
-            const optionElement = createHTMLElement("option", [], { value, textContent });
-            select.append(optionElement);
+            if (value !== selectedValue) {
+                const optionElement = createHTMLElement("option", [], { value, textContent });
+                select.append(optionElement);
+            }
         }
         this.#form.append(select);
     }
-    addTextarea(classList = [], type = "", required = false, placeholder = "") {
-        const textarea = createHTMLElement("textarea", classList, {name, required, placeholder});
+    addTextarea(classList = [], type = "", required = false, placeholder = "", value = "", name = "" ) {
+        const textarea = createHTMLElement("textarea", classList, {name, required, placeholder, value, });
         this.#form.append(textarea);
     }
-
+    addSpan(classList = [], textContent = "", id = "", name = "") {
+        const span = createHTMLElement("span", classList, {textContent, id, name});
+        this.#form.append(span);
+    }
+    addElements(elements) {
+        this.#form.append(...elements);
+    }
     get form() {
         const form = this.#form;
         this.reset();

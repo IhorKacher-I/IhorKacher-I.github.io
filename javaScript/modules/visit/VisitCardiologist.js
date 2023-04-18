@@ -12,10 +12,11 @@ export class VisitCardiologist extends Visit {
             age,
             normalPressure,
             bodyMassIndex,
-            diseases
+            diseases,
+            status
         }
     ) {
-        super({doctorName, priority, purposeVisit, description, patientName, id});
+        super({doctorName, priority, purposeVisit, description, patientName, id, status});
         this.age = (age.trim() !== "") ? age : "-";
         this.diseases = (diseases.trim() !== "") ? diseases : "-";
         this.bodyMassIndex = (bodyMassIndex.trim() !== "") ? bodyMassIndex : "-";
