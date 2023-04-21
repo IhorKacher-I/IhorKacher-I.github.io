@@ -25,11 +25,11 @@ export default class FormDirector {
                             break;
                         }
                         case "search__status": {
-                            formData.status = value === "All" ? "" : value;
+                            formData.status = value === "" ? "" : value;
                             break;
                         }
                         default: {
-                            formData.priority = value === "All" ? "" : value;
+                            formData.priority = value === "" ? "" : value;
                         }
                     }
                 }
@@ -73,11 +73,13 @@ export default class FormDirector {
                                 break;
                             }
                             case "search__status": {
-                                el.value = "All";
+                                el.value = ""
+                                el.selected = "";
                                 break;
                             }
                             default: {
-                                el.value = "All";
+                                el.value = ""
+                                el.selected = "";
                             }
                         }
                     }
@@ -90,12 +92,12 @@ export default class FormDirector {
 
         this.#builder.addInput(["filter__search"], "search-input", "text", "searchFor", false, "Search ...", "off");
         this.#builder.addSelect(['search__status'], false, [
-            {value: "All", textContent: "All"},
+            {value: "", textContent: "All"},
             {value: "Open", textContent: "Open"},
             {value: "Done", textContent: "Done"},
         ], "All");
         this.#builder.addSelect(['search__priority'], false, [
-            {value: "All", textContent: "All"},
+            {value: "", textContent: "All"},
             {value: "High", textContent: "High"},
             {value: "Normal", textContent: "Normal"},
             {value: "Low", textContent: "Low"},
@@ -150,11 +152,11 @@ export default class FormDirector {
             { value: "High", textContent: "High" },
             { value: "Normal", textContent: "Normal" },
             { value: "Low", textContent: "Low" },
-        ], visitDataObj.priority, "priority");
+        ], visitDataObj.priority, "priority", true);
         this.#builder.addSelect(['visit__status'], true, [
             { value: "Open", textContent: "Open" },
             { value: "Done", textContent: "Done" },
-        ], visitDataObj.status, "status");
+        ], visitDataObj.status, "status", true);
         this.#builder.addInput(["visit__purpose"],"", "text", "purposeVisit", true, 'The purpose of the visit?', '', visitDataObj.purposeVisit);
         this.#builder.addTextarea(["visit__description"],"text",true, "Description", visitDataObj.description, "description");
         this.#builder.addInput(["visit__name"],"", "text", "patientName", true, 'Enter full name:', '', visitDataObj.patientName);

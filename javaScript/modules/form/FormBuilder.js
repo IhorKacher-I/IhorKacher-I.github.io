@@ -41,17 +41,37 @@ export default class FormBuilder {
         const button = createHTMLElement("button", classList, {id, type, innerHTML});
         this.#form.append(button);
     }
-    addSelect(classList = [], required = false, options = [], selectedValue = "", name = "") {
+    addSelect(classList = [], required = false, options = [], selectedValue = "", name = "", edit = false) {
         const select = createHTMLElement("select", classList, { name, required });
-        const selectedOption = createHTMLElement("option", [], { value: selectedValue, textContent: selectedValue, selected: true });
+
+        let selectedOption;
+        if(edit) {
+            selectedOption = createHTMLElement("option", [], {
+                value: selectedValue,
+                textContent: selectedValue,
+                selected: true,
+            });
+        } else {
+            selectedOption = createHTMLElement("option", [], {
+                value: "",
+                textContent: selectedValue,
+                selected: true,
+                disabled: true,
+                hidden: true
+            });
+        }
+
         select.append(selectedOption);
         for (const option of options) {
             const { value, textContent } = option;
+            // const optionElement = createHTMLElement("option", [], { value, textContent });
+            // select.append(optionElement);
             if (value !== selectedValue) {
                 const optionElement = createHTMLElement("option", [], { value, textContent });
                 select.append(optionElement);
             }
         }
+
         this.#form.append(select);
     }
     addTextarea(classList = [], type = "", required = false, placeholder = "", value = "", name = "" ) {
