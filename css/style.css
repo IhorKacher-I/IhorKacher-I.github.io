@@ -63,30 +63,13 @@
   background: linear-gradient(90deg, #9229c1 0%, #541a81 100%);
 }
 
-.login-container {
-    text-align: center;
-}
-
 .logout__button,
-.login__button,
 .add-visit__button {
   width: 36px;
   height: 36px;
   padding: 10px 8px;
 }
 
-.login-link {
-    color: #ee3120;
-    background: none;
-    border: none;
-    text-decoration: underline;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.login-link:hover {
-    color: #3d0f66;
-}
 
 .add-visit__button {
   margin-left: auto;
